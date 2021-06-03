@@ -9,8 +9,8 @@ export class MainView extends React.Component {
         this.state = {
             movies: [
                 { _id: 1, title: 'Movie 1', description: 'desc 1...', imagePath: '...'},
-                { _id: 1, title: 'Movie 2', description: 'desc 2...', imagePath: '...'},
-                { _id: 1, title: 'Movie 3', description: 'desc 3...', imagePath: '...'}
+                { _id: 2, title: 'Movie 2', description: 'desc 2...', imagePath: '...'},
+                { _id: 3, title: 'Movie 3', description: 'desc 3...', imagePath: '...'}
             ],
             selectedMovie = null
         }
