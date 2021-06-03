@@ -16,6 +16,12 @@ export class MainView extends React.Component {
         }
     }
 
+    setSelectedMovie(newSelectedMovie) {
+        this.setState({
+            selectedMovie: newSelectedMovie
+        });
+    }
+
     render() {
         const {movies, selectedMovie} = this.state;
 
@@ -25,7 +31,8 @@ export class MainView extends React.Component {
             return <div className="main-view">No movies!</div>
         }
         return <div className="main-view">
-            {movies.map(movie => <MovieCard key={movie._id} movieObject={movie}/> )}
+            {movies.map(movie => <MovieCard key={movie._id} movieObject={movie}
+            onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/> )}
         </div>
     }
 }
