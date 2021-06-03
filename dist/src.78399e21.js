@@ -29687,7 +29687,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "movie-image"
       }, /*#__PURE__*/_react.default.createElement("img", {
         src: movie.imagePath,
-        alt: ""
+        alt: "Picture of the movie"
       })), /*#__PURE__*/_react.default.createElement("div", {
         className: "movie-title"
       }, /*#__PURE__*/_react.default.createElement("span", {
@@ -29695,12 +29695,24 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, "Title: "), /*#__PURE__*/_react.default.createElement("span", {
         className: "value"
       }, movie.title)), /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-genre"
+      }, /*#__PURE__*/_react.default.createElement("span", {
+        className: "label"
+      }, "Genre: "), /*#__PURE__*/_react.default.createElement("span", {
+        className: "value"
+      }, movie.genre)), /*#__PURE__*/_react.default.createElement("div", {
         className: "movie-description"
       }, /*#__PURE__*/_react.default.createElement("span", {
         className: "label"
       }, "Description: "), /*#__PURE__*/_react.default.createElement("span", {
         className: "value"
-      }, movie.description)), /*#__PURE__*/_react.default.createElement("button", {
+      }, movie.description)), /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-director"
+      }, /*#__PURE__*/_react.default.createElement("span", {
+        className: "label"
+      }, "Director: "), /*#__PURE__*/_react.default.createElement("span", {
+        className: "value"
+      }, movie.director)), /*#__PURE__*/_react.default.createElement("button", {
         onClick: function onClick() {
           clickBack(null);
         }
@@ -29766,16 +29778,22 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         _id: 1,
         title: 'Movie 1',
         description: 'desc 1...',
+        genre: 'Comedy',
+        director: 'director 1',
         imagePath: '...'
       }, {
         _id: 2,
         title: 'Movie 2',
         description: 'desc 2...',
+        genre: 'Action',
+        director: 'director 2',
         imagePath: '...'
       }, {
         _id: 3,
         title: 'Movie 3',
         description: 'desc 3...',
+        genre: 'Drama',
+        director: 'director 3',
         imagePath: '...'
       }],
       selectedMovie: null
