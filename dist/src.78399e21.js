@@ -29680,7 +29680,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           movie = _this$props.movie,
-          onBackClick = _this$props.onBackClick;
+          clickBack = _this$props.clickBack;
       return /*#__PURE__*/_react.default.createElement("div", {
         className: "movie-view"
       }, /*#__PURE__*/_react.default.createElement("div", {
@@ -29702,7 +29702,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "value"
       }, movie.description)), /*#__PURE__*/_react.default.createElement("button", {
         onClick: function onClick() {
-          onBackClick(null);
+          clickBack(null);
         }
       }, "Back"));
     }
@@ -29784,10 +29784,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MainView, [{
-    key: "setSelectedMovie",
-    value: function setSelectedMovie(newSelectedMovie) {
+    key: "updateState",
+    value: function updateState(x) {
       this.setState({
-        selectedMovie: newSelectedMovie
+        selectedMovie: x
       });
     }
   }, {
@@ -29799,15 +29799,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie;
 
-      if (selectedMovie) {
-        return /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
-          movie: selectedMovie,
-          onBackClick: function onBackClick(newSelectedMovie) {
-            _this2.setSelectedMovie(newSelectedMovie);
-          }
-        });
-      }
-
       if (movies.length === 0) {
         return /*#__PURE__*/_react.default.createElement("div", {
           className: "main-view"
@@ -29816,12 +29807,17 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       return /*#__PURE__*/_react.default.createElement("div", {
         className: "main-view"
-      }, movies.map(function (movie) {
+      }, selectedMovie ? /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
+        movie: selectedMovie,
+        clickBack: function clickBack(x) {
+          _this2.updateState(x);
+        }
+      }) : movies.map(function (movie) {
         return /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
           movieObject: movie,
-          onMovieClick: function onMovieClick(movie) {
-            _this2.setSelectedMovie(movie);
+          onMovieClick: function onMovieClick(x) {
+            _this2.updateState(x);
           }
         });
       }));
