@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
@@ -10,6 +11,15 @@ export class MainView extends React.Component {
             movies: [],
             selectedMovie: null
         }
+    }
+
+    componentDidMount() {
+        axios.get('https://myflix-app-1029.herokuapp.com/movies')
+        .then( response => {
+            this.setState( {movies: response.data} );
+        }).catch( error => {
+            console.log(error);
+        })
     }
 
     updateState(x) {
