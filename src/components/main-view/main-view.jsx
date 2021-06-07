@@ -9,7 +9,9 @@ export class MainView extends React.Component {
         super();
         this.state = {
             movies: [],
-            selectedMovie: null
+            selectedMovie: null,
+            user_status: null,
+            registered: flase
         }
     }
 
