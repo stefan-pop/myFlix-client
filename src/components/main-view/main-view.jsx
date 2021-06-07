@@ -37,11 +37,19 @@ export class MainView extends React.Component {
         this.setState( {registered: user} )
     }
 
+    loginUser(user) {
+        this.setState( {user_status: user} )
+    }
+
     render() {
         const {movies, selectedMovie, registered, user_status} = this.state;
 
         if(!registered) {
             return <RegistrationView onRegistration={ (user) => this.registerUser(user)} />
+        }
+
+        if(!user_status) {
+            return <LoginView onLogin={ (user) => this.loginUser(user) } />
         }
 
         if (movies.length === 0) {
