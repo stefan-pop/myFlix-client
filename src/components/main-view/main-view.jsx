@@ -66,6 +66,8 @@ export class MainView extends React.Component {
                             this.updateState(x);
                         }} />
                     ))}
+
+                <button type="button" onClick={() => this.loginUser(null)}>Log Out</button>
             </div>
         )
     }
