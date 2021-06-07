@@ -6,7 +6,7 @@ export function LoginView(props) {
 
         // Function that takes a prop 'onLogin' and assigns to the 'user_status' state from main-view a truthy value on successful submission.
         const handleSubmit = () => {
-            console.log(username, pwd);
+            console.log(username, password);
             props.onLogin(username);
         }
 
