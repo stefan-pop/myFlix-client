@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export function RegistrationView(props) {
     const [ username, setUsername ] = useState('');
@@ -29,4 +30,8 @@ export function RegistrationView(props) {
             <button type="button" onClick={handleSubmit}>Create account</button>
         </form>
     )
+}
+
+RegistrationView.propTypes = {
+    onRegistration: PropTypes.func.isRequired
 }
