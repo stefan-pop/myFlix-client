@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React from 'react';
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import {LoginView} from '../login-view/login-view';
 import {RegistrationView} from '../registration-view/registration-view';
 import {MovieCard} from '../movie-card/movie-card';
@@ -57,17 +60,22 @@ export class MainView extends React.Component {
         }
         return (
             <div className="main-view">
-                {selectedMovie
-                    ? <MovieView movie={selectedMovie} clickBack={(x) => {
-                        this.updateState(x);
-                    }} />
-                    : movies.map(movie => (
-                        <MovieCard key={movie._id} movieObject={movie} onMovieClick={(x) => {
-                            this.updateState(x);
-                        }} />
-                    ))}
 
-                <button type="button" onClick={() => this.loginUser(null)}>Log Out</button>
+                <Row className="justify-content-md-center">
+                {selectedMovie
+                    ? (
+                        <Col md={8}>
+                             <MovieView movie={selectedMovie} clickBack={(x) => { this.updateState(x); }} />
+                        </Col>   
+                    )
+                    : movies.map(movie => (
+                        <Col md={6} key={movie._id} >
+                             <MovieCard key={movie._id} movieObject={movie} onMovieClick={(x) => { this.updateState(x); }} />
+                        </Col>
+                    ))}
+                </Row>
+
+                {/* <button type="button" onClick={() => this.loginUser(null)}>Log Out</button> */}
             </div>
         )
     }
