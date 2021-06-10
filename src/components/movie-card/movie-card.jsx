@@ -13,7 +13,7 @@ export class MovieCard extends React.Component {
                 <Card.Img variant="top" src={movieObject.imagePath} alt='Movie Image' />
                 <Card.Body>
                     <Card.Title>{movieObject.title}</Card.Title>
-                    <Card.Text>{movieObject.description}</Card.Text>
+                    <Card.Text>{movieObject.description.slice(0, 60) + '...'}</Card.Text>
                     <Button variant="link" onClick={() => onMovieClick(movieObject)}>Show more...</Button>
                 </Card.Body>
             </Card>
