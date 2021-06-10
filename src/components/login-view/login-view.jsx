@@ -19,12 +19,12 @@ export function LoginView(props) {
         <h3>Login</h3> <hr />
         <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Enter username" onChange={ (e) => setUsername(e.target.value)}  />
+            <Form.Control type="text" onChange={ (e) => setUsername(e.target.value)}  />
         </Form.Group>
 
         <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={ (e) => setPassword(e.target.value)}  />
+            <Form.Control type="password"  onChange={ (e) => setPassword(e.target.value)}  />
         </Form.Group>
 
         <Button variant="primary" type="submit" onClick={ handleSubmit } >Submit</Button>
