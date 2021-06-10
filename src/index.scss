@@ -14,3 +14,14 @@ $font-weight-label: 600;
   font-size: 18px;
   font-family: $text;
 }
+
+@media screen and (max-width: 500px) {
+  * {
+    font-size: 14px;
+  }
+
+  .label {
+    font-size: 18px;
+    font-weight: $font-weight-label;
+  }
+}
