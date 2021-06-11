@@ -1,4 +1,6 @@
-$text: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@300&display=swap');
+
+$text: 'Rokkitt', serif;
 $font-weight-label: 600;
 .app-container {
   padding: 20px;
@@ -11,7 +13,7 @@ $font-weight-label: 600;
 }
 
 * {
-  font-size: 18px;
+  font-size: 20px;
   font-family: $text;
 }
 
