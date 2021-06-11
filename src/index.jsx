@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 // Components
 import {MainView} from './components/main-view/main-view';
+import {NavigationBar} from './components/navigation-bar/navigation-bar';
 
 // react-bootstrap components
 import Container from 'react-bootstrap/Container';
@@ -15,6 +16,7 @@ class MyFlixApplication extends React.Component {
 	render() {
 		return (
 			<Container>
+				<NavigationBar />
 				<MainView />
 			</Container>
 		);
