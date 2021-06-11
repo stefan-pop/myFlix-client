@@ -18,6 +18,10 @@ export function RegistrationView(props) {
         props.onRegistration(username);
     }
 
+    // function that implements the 'Already have an account' link at the bottom of the Form
+    const skipReg = () => {
+        props.skipRegistration()
+    }
     return (
         <Form>
             <h3>Create Account</h3> <hr />
@@ -43,7 +47,7 @@ export function RegistrationView(props) {
             
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
             <Form.Text className="text-muted">
-                Already have an account? Sign in <a href="#" target="_blank">here</a>
+                Already have an account? Sign in <a href="#" onClick={skipReg} >here</a>
             </Form.Text>
         </Form>
     )
