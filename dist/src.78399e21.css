@@ -19,20 +19,21 @@ form {
   justify-content: center;
 }
 .movie-view .movie-image img {
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 60%;
+  max-height: 60%;
 }
 
 .label {
   font-size: 26px;
   font-weight: 600;
 }
-
-.value {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Rokkitt:wght@300&display=swap");
 .app-container {
   padding: 20px;
+}
+
+.container {
+  margin-top: 60px;
 }
 
 .main-view {
@@ -42,8 +43,8 @@ form {
 }
 
 * {
-  font-size: 18px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-family: "Rokkitt", serif;
 }
 
 @media screen and (max-width: 500px) {
