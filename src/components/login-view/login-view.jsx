@@ -14,6 +14,11 @@ export function LoginView(props) {
         props.onLogin(username);
     }
 
+    // function that implements the 'No account yet' link at the bottom of the Form
+    const goToReg = () => {
+        props.goToRegistration()
+    }
+
     return(
         <Form>
             <h3>Login</h3> <hr />
@@ -30,7 +35,7 @@ export function LoginView(props) {
             <Button variant="primary" type="submit" onClick={ handleSubmit } >Submit</Button>
 
             <Form.Text className="text-muted">
-                No account yet? Create one <a href="#" target="_blank">here</a>
+                No account yet? Create one <a href="#" onClick={goToReg} >here</a>
             </Form.Text>
         </Form>
     )
