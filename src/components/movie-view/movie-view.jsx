@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// react-bootstrap components
 import Button from 'react-bootstrap/Button';
 
+// Styles
 import './movie-view.scss';
 
 export class MovieView extends React.Component {

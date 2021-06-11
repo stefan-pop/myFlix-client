@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Components
 import {MainView} from './components/main-view/main-view';
+
+// react-bootstrap components
 import Container from 'react-bootstrap/Container';
 
+// Styles
 import './index.scss';
 
 // Main component

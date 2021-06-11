@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// react-bootstrap components
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+// Styles
 import './movie-card.scss'
 
 export class MovieCard extends React.Component {
