@@ -75,7 +75,7 @@ export class MainView extends React.Component {
                 <Row className="justify-content-md-center">
                 {selectedMovie
                     ? (
-                        <Col md={8}>
+                        <Col md={12}>
                             <MovieView movie={selectedMovie} clickBack={(x) => { this.updateState(x); }} />
                         </Col>   
                     )
