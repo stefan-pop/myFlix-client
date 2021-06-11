@@ -65,12 +65,12 @@ export class MainView extends React.Component {
                 {selectedMovie
                     ? (
                         <Col md={8}>
-                             <MovieView movie={selectedMovie} clickBack={(x) => { this.updateState(x); }} />
+                            <MovieView movie={selectedMovie} clickBack={(x) => { this.updateState(x); }} />
                         </Col>   
                     )
                     : movies.map(movie => (
                         <Col md={6} key={movie._id} >
-                             <MovieCard key={movie._id} movieObject={movie} onMovieClick={(x) => { this.updateState(x); }} />
+                            <MovieCard key={movie._id} movieObject={movie} onMovieClick={(x) => { this.updateState(x); }} />
                         </Col>
                     ))}
                 </Row>

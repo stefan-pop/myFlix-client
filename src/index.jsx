@@ -7,13 +7,13 @@ import './index.scss';
 
 // Main component
 class MyFlixApplication extends React.Component {
-  render() {
-    return (
-      <Container>
-        <MainView />
-      </Container>
-    );
-  }
+	render() {
+		return (
+			<Container>
+				<MainView />
+			</Container>
+		);
+	}
 }
 
 // Root of the app
