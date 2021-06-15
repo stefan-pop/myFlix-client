@@ -31,7 +31,16 @@ export function LoginView(props) {
         if (!e.currentTarget.value.match(/^[A-Za-z0-9]+$/) && e.target.value.length > 0) {
             setValidateUser('Only alphanumeric characters allowed')
         }
-    }    
+    }  
+    
+    // Password validation
+    const validatePwd = (e) => {
+        if (e.target.value.length > 0 && e.target.value.length < 8) {
+            setValidatePassword('Password must be longer than 8 characters');
+        }else {
+            setValidatePassword('');
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -60,8 +69,8 @@ export function LoginView(props) {
             </Form.Group>
 
             <Form.Group controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password"  onChange={ (e) => setPassword(e.target.value)}  />
+                <Form.Label>Password <span className="validation-feedback">{validatePassword}</span></Form.Label>
+                <Form.Control type="password" value={password} onChange={ (e) => {setPassword(e.target.value), validatePwd(e)}} />
             </Form.Group>
 
             <Button variant="primary" type="submit" onClick={ handleSubmit } >Submit</Button>
