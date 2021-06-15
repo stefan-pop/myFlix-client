@@ -55,7 +55,7 @@ export class MainView extends React.Component {
     loginUser(authData) {
         console.log(authData);
         this.setState({
-          user_status: authData.user.username,
+          user_status: authData.user.username
         });
       
         localStorage.setItem('token', authData.token);
