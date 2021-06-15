@@ -10,7 +10,7 @@ import './movie-card.scss'
 
 export class MovieCard extends React.Component {
     render() {
-        const { movieObject, onMovieClick } = this.props;
+        const { movieObject } = this.props;
         
         return(
             <Card>
@@ -18,7 +18,7 @@ export class MovieCard extends React.Component {
                 <Card.Body>
                     <Card.Title>{movieObject.title}</Card.Title>
                     <Card.Text>{movieObject.description.slice(0, 60) + '...'}</Card.Text>
-                    <Button variant="link" onClick={() => onMovieClick(movieObject)}>Show more...</Button>
+                    <Button variant="link">Show more...</Button>
                 </Card.Body>
             </Card>
         )
@@ -47,7 +47,6 @@ MovieCard.propTypes = {
 
         featured: PropTypes.bool
 
-    }).isRequired,
-    onMovieClick: PropTypes.func.isRequired
+    }).isRequired
 }
 

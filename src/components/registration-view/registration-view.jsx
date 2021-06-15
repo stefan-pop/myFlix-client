@@ -14,16 +14,11 @@ export function RegistrationView(props) {
     const [ email, setEmail ] = useState('');
     const [ birth_date, setBirthDate ] = useState('');
 
-    // Function that takes a prop 'onRegistration' and assigns to the 'registered' state from main-view a truthy value on successful submission.
+    
     const handleSubmit = () => {
         console.log(username, pwd);
-        props.onRegistration(username);
     }
 
-    // function that implements the 'Already have an account' link at the bottom of the Form
-    const skipReg = () => {
-        props.skipRegistration()
-    }
     return (
         <Form>
             <h3>Create Account</h3> <hr />
@@ -49,13 +44,9 @@ export function RegistrationView(props) {
             
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
             <Form.Text className="text-muted">
-                Already have an account? Sign in <a href="#" onClick={skipReg} >here</a>
+                Already have an account? Sign in <a href="#">here</a>
             </Form.Text>
         </Form>
     )
 }
 
-RegistrationView.propTypes = {
-    onRegistration: PropTypes.func.isRequired,
-    skipRegistration: PropTypes.func.isRequired
-}

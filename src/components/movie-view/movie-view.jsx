@@ -10,7 +10,7 @@ import './movie-view.scss';
 export class MovieView extends React.Component {
 
     render() {
-        const {movie, clickBack} = this.props;
+        const {movie} = this.props;
         return (
             <div className="movie-view">
                 <div className="movie-image">
@@ -32,7 +32,7 @@ export class MovieView extends React.Component {
                     <span className="label">Director: </span>
                     <span className="value">{movie.director.name}</span>
                 </div>
-                <Button variant="link"  onClick={() => { clickBack(null); }}>Back</Button>
+                <Button variant="link">Back</Button>
             </div>
         )
     }
@@ -59,7 +59,5 @@ MovieView.propTypes = {
 
         featured: PropTypes.bool
 
-    }).isRequired,
-
-    clickBack: PropTypes.func.isRequired
+    }).isRequired
 }

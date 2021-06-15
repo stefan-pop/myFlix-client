@@ -20,9 +20,7 @@ export class MainView extends React.Component {
         super();
         this.state = {
             movies: [],
-            selectedMovie: null,
-            user_status: null,
-            registered: false
+            user_status: null
         }
     }
 
@@ -50,16 +48,6 @@ export class MainView extends React.Component {
         });
     }
 
-    updateState(x) {
-        this.setState({
-            selectedMovie: x
-        });
-    }
-
-    registerUser(user) {
-        this.setState( {registered: user} )
-    }
-
     loginUser(authData) {
         console.log(authData);
         this.setState({
@@ -71,24 +59,15 @@ export class MainView extends React.Component {
         this.getMovies(authData.token);
       }
 
-    // The next 2 functions manipulate the state of register in order to implement the 'already registered' and 'no account yet' links from RegistrationView & LoginView components.
-    skipRegistration() {
-        this.setState( {registered: true} )
-    }
-
-    goToRegistration() {
-        this.setState( {registered: false} )
-    }
-
     render() {
         const {movies, selectedMovie, registered, user_status} = this.state;
 
         if(!registered) {
-            return <RegistrationView onRegistration={ (user) => this.registerUser(user)} skipRegistration={ () => this.skipRegistration()} />
+            return <RegistrationView />
         }
 
         if(!user_status) {
-            return <LoginView onLogin={ (user) => this.loginUser(user) } goToRegistration={ () => this.goToRegistration()} />
+            return <LoginView onLogin={ (user) => this.loginUser(user) } />
         }
 
         if (movies.length === 0) {
@@ -106,12 +85,11 @@ export class MainView extends React.Component {
                     )
                     : movies.map(movie => (
                         <Col md={6} key={movie._id} >
-                            <MovieCard key={movie._id} movieObject={movie} onMovieClick={(x) => { this.updateState(x); }} />
+                            <MovieCard key={movie._id} movieObject={movie} />
                         </Col>
                     ))}
                 </Row>
 
-                {/* <button type="button" onClick={() => this.loginUser(null)}>Log Out</button> */}
             </div>
         )
     }

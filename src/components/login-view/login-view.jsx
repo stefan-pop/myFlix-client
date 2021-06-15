@@ -11,7 +11,7 @@ export function LoginView(props) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
 
-    // Function that takes a prop 'onLogin' and assigns to the 'user_status' state from main-view a truthy value on successful submission.
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -24,11 +24,6 @@ export function LoginView(props) {
         }).catch(err => {
             console.log('No such user');
         })
-    }
-
-    // function that implements the 'No account yet' link at the bottom of the Form
-    const goToReg = () => {
-        props.goToRegistration()
     }
 
     return(
@@ -54,6 +49,5 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-    onLogin: PropTypes.func.isRequired,
-    goToRegistration: PropTypes.func.isRequired
+    onLogin: PropTypes.func.isRequired
 }
