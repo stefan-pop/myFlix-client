@@ -59,6 +59,13 @@ export function RegistrationView(props) {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        // prevent submission of incorrect credentials
+        if ( validateUser || validateEmail || validatePassword ) {
+            alert('Incorrect credentials')
+            return false;
+        }
+
         axios.post('https://myflix-app-1029.herokuapp.com/users', {
             username: username,
             pwd: pwd,
