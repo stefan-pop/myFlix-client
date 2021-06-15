@@ -40,6 +40,10 @@ export class MovieView extends React.Component {
                 <Link to={`/directors/${movie.director.name}`}>
                     <Button variant="link">Director</Button>
                 </Link>
+
+                <Link to={`/genres/${movie.genre.name}`}>
+                    <Button variant="link">Genre</Button>
+                </Link>
             </div>
         )
     }
