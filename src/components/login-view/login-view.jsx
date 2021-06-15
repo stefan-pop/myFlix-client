@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import axios from 'axios';
+
 // react-bootstrap components
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -10,9 +12,18 @@ export function LoginView(props) {
     const [ password, setPassword ] = useState('');
 
     // Function that takes a prop 'onLogin' and assigns to the 'user_status' state from main-view a truthy value on successful submission.
-    const handleSubmit = () => {
-        console.log(username, password);
-        props.onLogin(username);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        axios.post('https://myflix-app-1029.herokuapp.com/login', {
+            username: username,
+            pwd: password
+        }).then(response => {
+            const data = response.data;
+            props.onLogin(data);
+        }).catch(err => {
+            console.log('No such user');
+        })
     }
 
     // function that implements the 'No account yet' link at the bottom of the Form
