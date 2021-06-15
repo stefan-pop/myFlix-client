@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 // react-bootstrap components
 import Button from 'react-bootstrap/Button';
 
+// Router
+import { Link } from "react-router-dom";
+
 // Styles
 import './movie-view.scss';
 
@@ -33,6 +36,10 @@ export class MovieView extends React.Component {
                     <span className="value">{movie.director.name}</span>
                 </div>
                 <Button variant="link"  onClick={() => { clickBack(); }}>Back</Button>
+
+                <Link to={`/directors/${movie.director.name}`}>
+                    <Button variant="link">Director</Button>
+                </Link>
             </div>
         )
     }
