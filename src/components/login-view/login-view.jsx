@@ -45,6 +45,12 @@ export function LoginView(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        //prevent submission of incorrect credentials
+        if( validatePassword || validateUser ) {
+            alert('Incorrect credentials')
+            return false
+        }
+
         axios.post('https://myflix-app-1029.herokuapp.com/login', {
             username: username,
             pwd: password
