@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+// Router
+import { Link } from "react-router-dom";
+
 // Styles
 import './registration-view.scss';
 
@@ -55,8 +58,9 @@ export function RegistrationView(props) {
             </Form.Group>
             
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+
             <Form.Text className="text-muted">
-                Already have an account? Sign in <a href="#">here</a>
+                Already have an account? Register <Link to={`/`}>here</Link>
             </Form.Text>
         </Form>
     )
