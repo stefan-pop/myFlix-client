@@ -20,6 +20,9 @@ export function NavigationBar( {logOut} ) {
             <Nav.Item className="nav-link">
                 <Link to={`/`}>Home</Link>
             </Nav.Item>
+            <Nav.Item className="nav-link">
+                <Link to={`/users/username`}>Profile</Link>
+            </Nav.Item>
         </Nav>
         <Button size="sm" className="float-end" onClick={logOut}>Log Out</Button>
     </Navbar>
