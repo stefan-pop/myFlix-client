@@ -42,7 +42,7 @@ export function LoginView(props) {
             <Button variant="primary" type="submit" onClick={ handleSubmit } >Submit</Button>
 
             <Form.Text className="text-muted">
-                No account yet? Create one <a href="#" onClick={goToReg} >here</a>
+                No account yet? Create one <a href="#">here</a>
             </Form.Text>
         </Form>
     )
