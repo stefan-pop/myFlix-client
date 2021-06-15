@@ -1,3 +1,7 @@
+.validation-feedback {
+  font-size: 12px;
+  color: red;
+}
 form {
   max-width: 600px;
   width: 100%;
@@ -26,6 +30,10 @@ form {
 .label {
   font-size: 26px;
   font-weight: 600;
+}
+.float-end {
+  position: absolute;
+  right: 50px;
 }
 @import url("https://fonts.googleapis.com/css2?family=Rokkitt:wght@300&display=swap");
 .app-container {
