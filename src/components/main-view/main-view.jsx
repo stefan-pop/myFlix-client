@@ -5,6 +5,9 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+// Router
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+
 // Components
 import {LoginView} from '../login-view/login-view';
 import {RegistrationView} from '../registration-view/registration-view';
