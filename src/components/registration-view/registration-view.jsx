@@ -15,8 +15,20 @@ export function RegistrationView(props) {
     const [ birth_date, setBirthDate ] = useState('');
 
     
-    const handleSubmit = () => {
-        console.log(username, pwd);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('https://myflix-app-1029.herokuapp.com/users', {
+            username: username,
+            pwd: pwd,
+            email: email,
+            birth_date: birth_date
+        }).then(response => {
+            const data = response.data;
+            console.log(data);
+            window.open('/', '_self');
+        }).catch(e => {
+            console.log('error registering the user')
+            });
     }
 
     return (
