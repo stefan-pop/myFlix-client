@@ -42,9 +42,16 @@ export class MainView extends React.Component {
         this.setState( {registered: user} )
     }
 
-    loginUser(user) {
-        this.setState( {user_status: user} )
-    }
+    loginUser(authData) {
+        console.log(authData);
+        this.setState({
+          user_status: authData.user.username,
+        });
+      
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.username);
+        this.getMovies(authData.token);
+      }
 
     // The next 2 functions manipulate the state of register in order to implement the 'already registered' and 'no account yet' links from RegistrationView & LoginView components.
     skipRegistration() {
