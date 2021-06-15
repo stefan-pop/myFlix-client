@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+// Router
+import { Link } from "react-router-dom";
+
 // Styles
 import './movie-card.scss'
 
@@ -18,7 +21,9 @@ export class MovieCard extends React.Component {
                 <Card.Body>
                     <Card.Title>{movieObject.title}</Card.Title>
                     <Card.Text>{movieObject.description.slice(0, 60) + '...'}</Card.Text>
-                    <Button variant="link">Show more...</Button>
+                    <Link to={`/movies/${movieObject._id}`}>
+                        <Button variant="link">See more</Button>
+                    </Link>
                 </Card.Body>
             </Card>
         )
