@@ -162,6 +162,15 @@ export class MainView extends React.Component {
 
                     {/* PROFILE VIEW */}
                     <Route path="/users/:username" render={({match, history}) => {
+
+                        if(!user_status) {
+                            return <Col>
+                                <LoginView onLogin={ (user) => this.loginUser(user) } />
+                            </Col>
+                        }
+
+                        if (movies.length === 0) return <div className="main-view" />;
+                        
                         return <Col>
                             <NavigationBar />
                             <ProfileView clickBack={() => {history.goBack()}} user={user_status} />
