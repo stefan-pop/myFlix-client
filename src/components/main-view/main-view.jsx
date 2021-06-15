@@ -92,7 +92,7 @@ export class MainView extends React.Component {
 
                         return movies.map(m => (
                             <Col md={6} key={m._id}>
-                                <NavigationBar />
+                                <NavigationBar logOut={() => this.logoutUser()} />
                                 <MovieCard movieObject={m} />
                             </Col>
                         ))        
@@ -120,7 +120,7 @@ export class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={12}>
-                            <NavigationBar />
+                            <NavigationBar logOut={() => this.logoutUser()} />
                             <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()} />
                         </Col>
                     }} />
@@ -138,7 +138,7 @@ export class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={8}>
-                            <NavigationBar />
+                            <NavigationBar logOut={() => this.logoutUser()} />
                             <DirectorView director={movies.find(m => m.director.name === match.params.name).director} clickBack={() => {history.goBack()}} />
                         </Col>
                     }} />
@@ -154,7 +154,7 @@ export class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={8}>
-                            <NavigationBar />
+                            <NavigationBar logOut={() => this.logoutUser()} />
                             <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} clickBack={() => {history.goBack()}} />
                         </Col>
                     }} />
@@ -170,9 +170,9 @@ export class MainView extends React.Component {
                         }
 
                         if (movies.length === 0) return <div className="main-view" />;
-                        
+
                         return <Col>
-                            <NavigationBar />
+                            <NavigationBar logOut={() => this.logoutUser()} />
                             <ProfileView clickBack={() => {history.goBack()}} user={user_status} />
                         </Col>
                     }} />
