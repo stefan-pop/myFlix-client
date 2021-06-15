@@ -62,6 +62,15 @@ export class MainView extends React.Component {
         this.getMovies(authData.token);
       }
 
+    // Logout function that clears the local storage and sets the user_status to null
+    logoutUser() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.setState({
+            user_status: null
+        });
+    }
+
     render() {
         const {movies, user_status} = this.state;
 
