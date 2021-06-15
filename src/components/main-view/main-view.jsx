@@ -87,6 +87,15 @@ export class MainView extends React.Component {
                     }} />
 
 
+                    {/* REGISTRATION VIEW */}
+                    <Route path="/register" render={() => {
+                        if (user_status) return <Redirect to="/" />
+                        return <Col>
+                            <RegistrationView />
+                        </Col>
+                    }} />
+
+
                     {/* MOVIE VIEW */}
                     <Route path="/movies/:movieId" render={({match, history}) => {
 
