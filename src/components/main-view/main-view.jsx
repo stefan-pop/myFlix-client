@@ -16,6 +16,7 @@ import {MovieView} from '../movie-view/movie-view';
 import {DirectorView} from '../director-view/director-view';
 import {GenreView} from '../genre-view/genre-view';
 import {NavigationBar} from '../navigation-bar/navigation-bar';
+import {ProfileView} from '../profile-view/profile-view';
 
 export class MainView extends React.Component {
 
@@ -155,6 +156,15 @@ export class MainView extends React.Component {
                         return <Col md={8}>
                             <NavigationBar />
                             <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} clickBack={() => {history.goBack()}} />
+                        </Col>
+                    }} />
+
+
+                    {/* PROFILE VIEW */}
+                    <Route path="/users/:username" render={({match, history}) => {
+                        return <Col>
+                            <NavigationBar />
+                            <ProfileView clickBack={() => {history.goBack()}} user={user_status} />
                         </Col>
                     }} />
 
