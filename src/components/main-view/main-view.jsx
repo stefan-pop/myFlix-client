@@ -70,23 +70,25 @@ export class MainView extends React.Component {
             return <div className="main-view">No movies!</div>
         }
         return (
-            <div className="main-view">
+            <Router>
+                <Row className="main-view justify-content-md-center">
+                    <Route exact path="/" render={() => {
+                        return movies.map(m => (
+                            <Col md={6} key={m._id}>
+                                <MovieCard movieObject={m} />
+                            </Col>
+                        ))        
+                    }} />
 
-                <Row className="justify-content-md-center">
-                {selectedMovie
-                    ? (
-                        <Col md={12}>
-                            <MovieView movie={selectedMovie} clickBack={(x) => { this.updateState(x); }} />
-                        </Col>   
-                    )
-                    : movies.map(movie => (
-                        <Col md={6} key={movie._id} >
-                            <MovieCard key={movie._id} movieObject={movie} />
+                    <Route path="/movies/:movieId" render={({match, history}) => {
+                        return <Col md={12}>
+                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()} />
                         </Col>
-                    ))}
+                    }} />
                 </Row>
+            
+            </Router>
 
-            </div>
         )
     }
 }
