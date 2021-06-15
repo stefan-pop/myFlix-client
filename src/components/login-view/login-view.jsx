@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 // react-bootstrap components
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
 
 export function LoginView(props) {
     const [ username, setUsername ] = useState('');
@@ -29,6 +30,10 @@ export function LoginView(props) {
     }
 
     return(
+        <>
+        <Navbar bg="dark" variant="dark" fixed="top">
+            <Navbar.Brand href="#home">My Flix</Navbar.Brand>
+        </Navbar>
         <Form>
             <h3>Login</h3> <hr />
             <Form.Group controlId="formUsername">
@@ -47,6 +52,7 @@ export function LoginView(props) {
                 No account yet? Create one <Link to={`/register`}>here</Link>
             </Form.Text>
         </Form>
+        </>
     )
 }
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // react-bootstrap components
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
 
 // Router
 import { Link } from "react-router-dom";
@@ -35,6 +36,10 @@ export function RegistrationView(props) {
     }
 
     return (
+        <>
+        <Navbar bg="dark" variant="dark" fixed="top">
+            <Navbar.Brand href="#home">My Flix</Navbar.Brand>
+        </Navbar>
         <Form>
             <h3>Create Account</h3> <hr />
             <Form.Group controlId="formUsername">
@@ -63,6 +68,7 @@ export function RegistrationView(props) {
                 Already have an account? Register <Link to={`/`}>here</Link>
             </Form.Text>
         </Form>
+        </>
     )
 }
 
