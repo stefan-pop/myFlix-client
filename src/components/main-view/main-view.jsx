@@ -62,17 +62,21 @@ export class MainView extends React.Component {
     render() {
         const {movies, user_status} = this.state;
 
-        if(!user_status) {
-            return <LoginView onLogin={ (user) => this.loginUser(user) } />
-        }
-
-        if (movies.length === 0) {
-            return <div className="main-view">No movies!</div>
-        }
         return (
             <Router>
                 <Row className="main-view justify-content-md-center">
+
+                    {/* HOME */}
                     <Route exact path="/" render={() => {
+
+                        if(!user_status) {
+                            return  <Col>
+                                <LoginView onLogin={ (user) => this.loginUser(user) } />
+                            </Col>
+                        }
+
+                        if (movies.length === 0) return <div className="main-view" />;
+
                         return movies.map(m => (
                             <Col md={6} key={m._id}>
                                 <MovieCard movieObject={m} />
@@ -80,7 +84,18 @@ export class MainView extends React.Component {
                         ))        
                     }} />
 
+
+                    {/* MOVIE VIEW */}
                     <Route path="/movies/:movieId" render={({match, history}) => {
+
+                        if(!user_status) {
+                            return  <Col>
+                                <LoginView onLogin={ (user) => this.loginUser(user) } />
+                            </Col>
+                        }
+
+                        if (movies.length === 0) return <div className="main-view" />;
+
                         return <Col md={12}>
                             <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()} />
                         </Col>
