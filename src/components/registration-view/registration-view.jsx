@@ -89,18 +89,21 @@ export function RegistrationView(props) {
         <Form>
             <h3>Create Account</h3> <hr />
             <Form.Group controlId="formUsername">
-                <Form.Label>Username <span className="validation-feedback">{validateUser}</span> </Form.Label>
+                <Form.Label>Username</Form.Label>
                 <Form.Control type="text"  value={username}  onChange={ (e) => { setUsername(e.target.value), validateUsername(e) }} />
+                <span className="validation-feedback">{validateUser}</span> 
             </Form.Group>
 
             <Form.Group controlId="formPassword">
-                <Form.Label>Password  <span className="validation-feedback">{validatePassword}</span> </Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control type="password"  value={pwd} onChange={ (e) => { setPwd(e.target.value), validatePwd(e) }} />
+                <span className="validation-feedback">{validatePassword}</span> 
             </Form.Group>
 
             <Form.Group controlId="formEmail">
-                <Form.Label>Email address <span className="validation-feedback">{validateEmail}</span> </Form.Label>
+                <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" value={email} onChange={ (e) => { setEmail(e.target.value), validateMail(e) }} />
+                <span className="validation-feedback">{validateEmail}</span> 
             </Form.Group>
             
             <Form.Group controlId="formBirthday">

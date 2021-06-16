@@ -70,13 +70,15 @@ export function LoginView(props) {
         <Form>
             <h3>Login</h3> <hr />
             <Form.Group controlId="formUsername">
-                <Form.Label>Username <span className="validation-feedback">{validateUser}</span></Form.Label>
+                <Form.Label>Username </Form.Label>
                 <Form.Control type="text" value={username} onChange={ (e) => {setUsername(e.target.value), validateUsername(e)}} />
+                <span className="validation-feedback">{validateUser}</span>
             </Form.Group>
 
             <Form.Group controlId="formPassword">
-                <Form.Label>Password <span className="validation-feedback">{validatePassword}</span></Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control type="password" value={password} onChange={ (e) => {setPassword(e.target.value), validatePwd(e)}} />
+                <span className="validation-feedback">{validatePassword}</span>
             </Form.Group>
 
             <Button variant="primary" type="submit" onClick={ handleSubmit } >Submit</Button>
