@@ -152,7 +152,7 @@ export class MainView extends React.Component {
 
                         return <Col md={12}>
                             <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
-                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()} />
+                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()}  token={token} username={user_status} />
                         </Col>
                     }} />
 
