@@ -102,14 +102,11 @@ export function ProfileView({clickBack, userProfile, userToken, onDelete, onUpda
                 </Form.Group>
 
                 <div className="button-wrapper">
+                    <Button variant="info"  onClick={() => { clickBack(); }}>Back</Button>
                     <Button variant="primary" size="sm" type="submit" onClick={updateUser} >Update details</Button>
                     <Button variant="danger" size="sm" type="button" onClick={deleteUser} >Delete account</Button>
                 </div>
-
-            </Form>
-
-
-            <Button variant="link"  onClick={() => { clickBack(); }}>Back</Button>
+            </Form>   
         </div>
     )
 }
