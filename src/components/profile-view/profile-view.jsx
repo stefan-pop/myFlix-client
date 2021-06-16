@@ -6,6 +6,37 @@ import axios from 'axios';
 // Style
 import './profile-view.scss';
 
+export function ProfileView({clickBack, userProfile, userToken, onDelete, onUpdate}) {
+
+    const [ newUsername, updateUsername ] = useState('');
+    const [ newPassword, updatePassword ] = useState('');
+    const [ newEmail, updateEmail ] = useState('');
+    const [ newBirth, updateBirth ] = useState('');
+
+    const { username, email, birth_date, favorite_movies  } = userProfile;
+
+    // Update users info
+    const updateUser = (e) => {
+        e.preventDefault();
+       
+        axios.put(`https://myflix-app-1029.herokuapp.com/users/${username}`,
+        { 
+            username: newUsername,
+            pwd: newPassword,
+            email: newEmail,
+            birth_date: newBirth
+        },
+        {
+            headers: { Authorization: `Bearer ${userToken}`}
+
+        }).then(response => {
+            const data = response.data;
+            console.log(data)
+            onUpdate(data)
+        }).catch(err => {
+            console.log(err + 'Update fail')
+        })
+    }
 
     return (
         <div className="profile-view">
@@ -31,6 +62,35 @@ import './profile-view.scss';
                     </ul>
                 </div>
             </div>
+
+            <Form className="update-info">
+                <h3>Manage account</h3> <hr />
+                <Form.Group controlId="formBasicUsername">
+                    <Form.Label>New-username:</Form.Label>
+                    <Form.Control type="text" value={newUsername} onChange={(e) => updateUsername(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>New-password:</Form.Label>
+                    <Form.Control type="password" value={newPassword} onChange={(e) => updatePassword(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>New-email:</Form.Label>
+                    <Form.Control type="email"  value={newEmail} onChange={(e) => updateEmail(e.target.value)} />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicBirth">
+                    <Form.Label>New-Birth(yyyy-mm-dd):</Form.Label>
+                    <Form.Control type="text"  value={newBirth} onChange={(e) => updateBirth(e.target.value)} />
+                </Form.Group>
+
+                <div className="button-wrapper">
+                    <Button variant="primary" size="sm" type="submit" onClick={updateUser} >Update details</Button>
+                </div>
+
+            </Form>
+
 
             <Button variant="link"  onClick={() => { clickBack(); }}>Back</Button>
         </div>
