@@ -180,7 +180,7 @@ export class MainView extends React.Component {
 
                         return <Col>
                             <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
-                            <ProfileView clickBack={() => {history.goBack()}} user={user_status} />
+                            <ProfileView clickBack={() => {history.goBack()}} userProfile={user_profile} />
                         </Col>
                     }} />
 
