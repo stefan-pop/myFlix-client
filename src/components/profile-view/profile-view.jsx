@@ -1,7 +1,11 @@
-import React from 'react';
+import React , {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
-export function ProfileView({clickBack, user}) {
+// Style
+import './profile-view.scss';
+
 
     return (
         <div className="profile-view">
