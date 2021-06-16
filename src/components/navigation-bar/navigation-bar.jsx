@@ -11,7 +11,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
-export function NavigationBar( {logOut} ) {
+export function NavigationBar( {logOut, user} ) {
 
     return(
     <Navbar bg="light" variant="light" fixed="top">
@@ -21,7 +21,7 @@ export function NavigationBar( {logOut} ) {
                 <Link to={`/`}>Home</Link>
             </Nav.Item>
             <Nav.Item className="nav-link">
-                <Link to={`/users/username`}>Profile</Link>
+                <Link to={`/users/${user}`}>Profile</Link>
             </Nav.Item>
         </Nav>
         <Button size="sm" className="float-end" onClick={logOut}>Log Out</Button>
