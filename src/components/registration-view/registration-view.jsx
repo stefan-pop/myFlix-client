@@ -33,7 +33,7 @@ export function RegistrationView(props) {
             setValidateUser('');
         }
 
-        if (!e.currentTarget.value.match(/^[0-9a-z]+$/) && e.target.value.length > 0) {
+        if (!e.currentTarget.value.match(/^[0-9a-zA-Z]+$/) && e.target.value.length > 0) {
             setValidateUser('Only alphanumeric characters allowed')
         }
     }
