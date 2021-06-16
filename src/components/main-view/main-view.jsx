@@ -24,7 +24,9 @@ export class MainView extends React.Component {
         super();
         this.state = {
             movies: [],
-            user_status: null
+            user_status: null,
+            token: null,
+            user_profile: null
         }
     }
 
@@ -32,7 +34,9 @@ export class MainView extends React.Component {
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
             this.setState({
-            user_status: localStorage.getItem('user')
+            user_status: localStorage.getItem('user'),
+            user_profile: JSON.parse(localStorage.getItem('profile')),
+            token: localStorage.getItem('token')
             });
             this.getMovies(accessToken);
         }
@@ -55,9 +59,12 @@ export class MainView extends React.Component {
     loginUser(authData) {
         console.log(authData);
         this.setState({
-          user_status: authData.user.username
+          user_status: authData.user.username,
+          token: authData.token,
+          user_profile: authData.user
         });
       
+        localStorage.setItem('profile', JSON.stringify(authData.user));
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.username);
         this.getMovies(authData.token);
