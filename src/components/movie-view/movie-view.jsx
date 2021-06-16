@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 // Router
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 // Styles
 import './movie-view.scss';
