@@ -72,8 +72,7 @@ export class MainView extends React.Component {
 
     // Logout function that clears the local storage and sets the user_status to null
     logoutUser() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        localStorage.clear();
         this.setState({
             user_status: null
         });
