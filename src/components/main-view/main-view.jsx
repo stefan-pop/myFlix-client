@@ -79,6 +79,30 @@ export class MainView extends React.Component {
         });
     }
 
+    // Update Users info
+    updateUser(data) {
+        console.log(data);
+        this.setState( {
+            user_status: data.username,
+            user_profile: data
+        } );
+
+        localStorage.setItem('user', data.username);
+        localStorage.setItem('profile', JSON.stringify(data));
+    }
+
+    // Remove account
+    deleteUser() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('profile');
+        this.setState({
+            user_status: null,
+            token: null
+        });
+    }
+
+
     render() {
         const {movies, user_status, token, user_profile} = this.state;
 
@@ -180,7 +204,7 @@ export class MainView extends React.Component {
 
                         return <Col>
                             <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
-                            <ProfileView clickBack={() => {history.goBack()}} userProfile={user_profile} />
+                            <ProfileView clickBack={() => {history.goBack()}} userProfile={user_profile} userToken={token} onDelete={() => this.deleteUser()}  onUpdate={(data) => this.updateUser(data)} />
                         </Col>
                     }} />
 
