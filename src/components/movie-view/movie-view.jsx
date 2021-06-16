@@ -13,7 +13,32 @@ import './movie-view.scss';
 export class MovieView extends React.Component {
 
     render() {
-        const {movie, clickBack} = this.props;
+        const {movie, clickBack, token, username} = this.props;
+
+
+        // Add a movie to favorites
+        const addMovie = () => {
+            const userName = username;
+            const accessToken = token;
+            const movieId = movie._id;
+            const url = `https://myflix-app-1029.herokuapp.com/users/${userName}/favorites/${movieId}` ;
+            // axios.post(url , {
+            //     headers: {Authorization: `Bearer ${token}`}
+            // })
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization": "Bearer " + accessToken
+                }
+            }).then(response => {
+                console.log(response.data); 
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        
+
         return (
             <div className="movie-view">
                 <div className="movie-image">
@@ -44,6 +69,8 @@ export class MovieView extends React.Component {
                 <Link to={`/genres/${movie.genre.name}`}>
                     <Button variant="link">Genre</Button>
                 </Link>
+
+                <Button variant="link" onClick={addMovie}>Add to favorites</Button>
             </div>
         )
     }
