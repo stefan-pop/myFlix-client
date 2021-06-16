@@ -37,6 +37,22 @@ export function ProfileView({clickBack, userProfile, userToken, onDelete, onUpda
             console.log(err + 'Update fail')
         })
     }
+    
+
+    // Delete Account
+    const deleteUser = () => {
+        axios.delete(`https://myflix-app-1029.herokuapp.com/users/${username}`,
+        {
+            headers: { Authorization: `Bearer ${userToken}` }
+
+        }).then(response => {
+            console.log(response.data)
+            onDelete();
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
 
     return (
         <div className="profile-view">
@@ -87,6 +103,7 @@ export function ProfileView({clickBack, userProfile, userToken, onDelete, onUpda
 
                 <div className="button-wrapper">
                     <Button variant="primary" size="sm" type="submit" onClick={updateUser} >Update details</Button>
+                    <Button variant="danger" size="sm" type="button" onClick={deleteUser} >Delete account</Button>
                 </div>
 
             </Form>
