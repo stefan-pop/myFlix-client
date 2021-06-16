@@ -40,25 +40,25 @@ export function ProfileView({clickBack, userProfile, userToken, onDelete, onUpda
 
     return (
         <div className="profile-view">
-            <h3>{`Welcome ${userProfile.username}`}</h3> <hr />
+            <h3>{`Welcome to your profile ${username}`}</h3> <hr />
 
             <div className="user-profile">
                 <div className="user-info">
                     <div className="user-label">Username:</div>
-                    <div className="user">{userProfile.username}</div>
+                    <div className="user">{username}</div>
                 </div>
                 <div className="user-info">
                     <div className="user-label">Email:</div>
-                    <div className="user">{userProfile.email}</div>
+                    <div className="user">{email}</div>
                 </div>
                 <div className="user-info">
                     <div className="user-label">Birth:</div>
-                    <div className="user">{userProfile.birth_date.slice(0, 10)}</div>
+                    <div className="user">{birth_date.slice(0, 10)}</div>
                 </div>
                 <div className="user-info">
                     <div className="user-label">Favorite Movies:</div>
                     <ul className="user">
-                        {userProfile.favorite_movies.map((id, index) => <li key={index}> <span>{id}</span></li> )}
+                        {favorite_movies.map((id, index) => <li key={index}> <span>{id}</span></li> )}
                     </ul>
                 </div>
             </div>
