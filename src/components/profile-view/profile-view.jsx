@@ -54,6 +54,12 @@ export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpd
     }
 
 
+    // Filters the movies based on the favorite_movies (array of only movie IDs)
+    const filteredMovies = movies.filter(m => {
+        return favorite_movies.indexOf(m._id) >= 0 ;
+    });
+    
+
     return (
         <div className="profile-view">
             <h3>{`Welcome to your profile ${username}`}</h3> <hr />
@@ -74,7 +80,7 @@ export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpd
                 <div className="user-info">
                     <div className="user-label">Favorite Movies:</div>
                     <ul className="user">
-                        {favorite_movies.map((id, index) => <li key={index}> <span>{id}</span></li> )}
+                    {filteredMovies.map((m, index)=> <li key={index} className="fav-list">{m.title}</li>)}
                     </ul>
                 </div>
             </div>
