@@ -6,7 +6,7 @@ import axios from 'axios';
 // Style
 import './profile-view.scss';
 
-export function ProfileView({clickBack, userProfile, userToken, onDelete, onUpdate}) {
+export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpdate, movies, onMovieDelete }) {
 
     const [ newUsername, updateUsername ] = useState('');
     const [ newPassword, updatePassword ] = useState('');
