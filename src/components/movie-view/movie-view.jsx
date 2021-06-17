@@ -35,7 +35,11 @@ export class MovieView extends React.Component {
                     "Authorization": "Bearer " + accessToken
                 }
             }).then(response => {
-                console.log(response.data); 
+                return response.json();
+            }).then(data => {
+                const userObj = data;
+                console.log(userObj);
+                onMovieAdd(userObj);
             }).catch(err => {
                 console.log(err);
             })
