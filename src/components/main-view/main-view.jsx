@@ -42,6 +42,7 @@ export class MainView extends React.Component {
         }
     }
 
+    // Fetch movies from DB
     getMovies(token) {
         axios.get('https://myflix-app-1029.herokuapp.com/movies', {
           headers: { Authorization: `Bearer ${token}`}
@@ -56,6 +57,8 @@ export class MainView extends React.Component {
         });
     }
 
+
+    // Login
     loginUser(authData) {
         console.log(authData);
         this.setState({
@@ -101,7 +104,7 @@ export class MainView extends React.Component {
         });
     }
 
-    // Set the state of user_profile, which represents an object with data about a user, after adding a movie.
+    // Set the state of user_profile, which represents an object with data about a user, after adding or deleting a movie.
     onMovieAddOrDelete(data) {
         console.log(data)
         this.setState({
