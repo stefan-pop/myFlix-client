@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Router
 import { Link } from "react-router-dom";
@@ -27,4 +28,9 @@ export function NavigationBar( {logOut, user} ) {
         <Button size="sm" className="float-end" onClick={logOut}>Log Out</Button>
     </Navbar>
     )
+}
+
+NavigationBar.propTypes = {
+    user: PropTypes.string.isRequired,
+    logOut: PropTypes.func.isRequired
 }

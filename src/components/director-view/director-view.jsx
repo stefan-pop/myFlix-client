@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
 
 export function DirectorView({ director, clickBack }) {
 
@@ -11,4 +12,14 @@ export function DirectorView({ director, clickBack }) {
             <Button variant="link"  onClick={() => { clickBack(); }}>Back</Button>
         </div>
     )
+}
+
+
+DirectorView.propTypes = {
+    director: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        bio: PropTypes.string.isRequired,
+        death: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    }).isRequired,
+    clickBack: PropTypes.func.isRequired
 }

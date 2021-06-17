@@ -2,6 +2,7 @@ import React , {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 // Style
 import './profile-view.scss';
@@ -131,4 +132,25 @@ export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpd
             </Form>   
         </div>
     )
+}
+
+
+ProfileView.propTypes = {
+    movies: PropTypes.array.isRequired,
+
+    clickBack: PropTypes.func.isRequired,
+
+    userProfile: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        favorite_movies: PropTypes.array.isRequired,
+        birth_date: PropTypes.string.isRequired,
+        pwd: PropTypes.string,
+        _id: PropTypes.string
+    }).isRequired,
+
+    userToken: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired,
+    onMovieDelete: PropTypes.func.isRequired,
 }

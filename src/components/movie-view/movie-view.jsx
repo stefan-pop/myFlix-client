@@ -10,6 +10,7 @@ import axios from 'axios';
 
 // Styles
 import './movie-view.scss';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 export class MovieView extends React.Component {
 
@@ -104,5 +105,20 @@ MovieView.propTypes = {
 
         featured: PropTypes.bool
 
-    }).isRequired
+    }).isRequired,
+
+    clickBack: PropTypes.func.isRequired,
+
+    token: PropTypes.string.isRequired,
+
+    user: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        favorite_movies: PropTypes.array.isRequired,
+        birth_date: PropTypes.string.isRequired,
+        pwd: PropTypes.string,
+        _id: PropTypes.string
+    }).isRequired,
+    
+    onMovieAdd: PropTypes.func.isRequired
 }
