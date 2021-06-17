@@ -101,6 +101,16 @@ export class MainView extends React.Component {
         });
     }
 
+    // Set the state of user_profile, which represents an object with data about a user, after adding a movie.
+    onMovieAddOrDelete(data) {
+        console.log(data)
+        this.setState({
+            user_profile: data
+        });
+
+        localStorage.setItem('profile', JSON.stringify(data))
+    }
+
 
     render() {
         const {movies, user_status, token, user_profile} = this.state;
@@ -151,7 +161,7 @@ export class MainView extends React.Component {
 
                         return <Col md={12}>
                             <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
-                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()}  token={token} user={user_profile} />
+                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()}  token={token} user={user_profile} onMovieAdd={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
 
