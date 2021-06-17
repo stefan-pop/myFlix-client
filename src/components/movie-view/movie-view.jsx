@@ -14,7 +14,9 @@ import './movie-view.scss';
 export class MovieView extends React.Component {
 
     render() {
-        const {movie, clickBack, token, username} = this.props;
+        const {movie, clickBack, token, user} = this.props;
+
+        const { username } = user
 
 
         // Add a movie to favorites
