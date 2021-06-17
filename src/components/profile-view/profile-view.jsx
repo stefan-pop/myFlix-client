@@ -53,6 +53,22 @@ export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpd
         })
     }
 
+    // Delete a film from favorites
+    const deleteMovie = (movieID) => {
+        axios.delete(`https://myflix-app-1029.herokuapp.com/users/${username}/favorites/${movieID}`,
+        {
+            headers: { Authorization: `Bearer ${userToken}` }
+
+        }).then(response => {
+            const data = response.data;
+            console.log(data)
+            onMovieDelete(data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+
 
     // Filters the movies based on the favorite_movies (array of only movie IDs)
     const filteredMovies = movies.filter(m => {
@@ -80,7 +96,7 @@ export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpd
                 <div className="user-info">
                     <div className="user-label">Favorite Movies:</div>
                     <ul className="user">
-                    {filteredMovies.map((m, index)=> <li key={index} className="fav-list">{m.title}</li>)}
+                    {filteredMovies.map((m, index)=> <li key={index} className="fav-list"> <span>{m.title}</span> <button className="close" onClick={() => deleteMovie(m._id)} >&times;</button> </li>)}
                     </ul>
                 </div>
             </div>
