@@ -14,7 +14,7 @@ import './movie-view.scss';
 export class MovieView extends React.Component {
 
     render() {
-        const {movie, clickBack, token, user} = this.props;
+        const { movie, clickBack, token, user, onMovieAdd } = this.props;
 
         const { username } = user
 
