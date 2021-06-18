@@ -1,10 +1,12 @@
+$boxShadow: 5px 5px 15px 5px #747373;
+$formBackgreound: #fff;
 
 .update-info {
     border: 1px solid rgba(128, 128, 128, 0.288);
     padding: 10px;
     border-radius: 5px;
     text-align: left;
-    background-color: rgb(207, 201, 201);
+    background-color: $formBackgreound;
     margin: 0;
     max-width: 100%;
 
@@ -27,7 +29,7 @@
     }
     
     .user-profile {
-        background-color: rgb(207, 201, 201);
+        background-color: $formBackgreound;
         padding: 20px;
         display: grid;
         grid-template-columns: 1fr 1fr;

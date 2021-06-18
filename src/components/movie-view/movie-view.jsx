@@ -67,7 +67,7 @@ export class MovieView extends React.Component {
                 <div className="movie-director">
                     <span className="label">Director: </span>
                     <span className="value">{movie.director.name}</span>
-                </div>
+                </div> <hr />
                 <Button variant="link"  onClick={() => { clickBack(); }}>Back</Button>
 
                 <Link to={`/directors/${movie.director.name}`}>
