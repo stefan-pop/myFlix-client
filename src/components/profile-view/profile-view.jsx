@@ -82,7 +82,7 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
 
     return (
         <div className="profile-view">
-            <h3>{`Welcome to your profile ${username}`}</h3> <hr />
+            <h4>{`Welcome ${username}`}</h4> <hr />
 
             <div className="user-profile">
                 <div className="user-info">
@@ -106,7 +106,7 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
             </div>
 
             <Form className="update-info">
-                <h3>Manage account</h3> <hr />
+                <h4>Manage account</h4> <hr />
                 <Form.Group controlId="formBasicUsername">
                     <Form.Label>New-username:</Form.Label>
                     <Form.Control type="text" value={newUsername} onChange={(e) => updateUsername(e.target.value)} />
