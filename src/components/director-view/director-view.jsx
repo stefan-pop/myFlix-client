@@ -3,7 +3,6 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 
-export function DirectorView({ director, clickBack }) {
 // Router
 import { Link } from "react-router-dom";
 
@@ -40,5 +39,6 @@ DirectorView.propTypes = {
         bio: PropTypes.string.isRequired,
         death: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
     }).isRequired,
-    clickBack: PropTypes.func.isRequired
+    clickBack: PropTypes.func.isRequired,
+    movies: PropTypes.array.isRequired
 }
