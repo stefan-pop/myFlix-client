@@ -4,6 +4,12 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 
 export function DirectorView({ director, clickBack }) {
+// Router
+import { Link } from "react-router-dom";
+
+// Style
+import './director-view.scss';
+
 export function DirectorView({ director, clickBack, movies }) {
 
     const directorsMovies = movies.filter(m => m.director.name === director.name)
