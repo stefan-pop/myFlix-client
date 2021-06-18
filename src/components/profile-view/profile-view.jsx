@@ -4,6 +4,9 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
+// Router
+import { Link } from "react-router-dom";
+
 // Style
 import './profile-view.scss';
 
@@ -97,7 +100,7 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
                 <div className="user-info">
                     <div className="user-label">Favorite Movies:</div>
                     <ul className="user">
-                    {filteredMovies.map((m, index)=> <li key={index} className="fav-list"> <span>{m.title}</span> <button className="close" onClick={() => deleteMovie(m._id)} >&times;</button> </li>)}
+                    {filteredMovies.map((m, index)=> <li key={index} className="fav-list">  <Link to={`/movies/${m._id}`}>{m.title}</Link> <button className="close" onClick={() => deleteMovie(m._id)} >&times;</button> </li>)}
                     </ul>
                 </div>
             </div>
