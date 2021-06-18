@@ -17,6 +17,8 @@ form {
 }
 .movie-view {
   padding: 10px;
+  background-color: #fff;
+  box-shadow: 5px 5px 15px 5px #6b6b6b;
 }
 .movie-view .movie-image {
   display: flex;
@@ -31,6 +33,12 @@ form {
   font-size: 26px;
   font-weight: 600;
 }
+.director-view {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 5px 5px 15px 5px #7c7a7a;
+}
 .float-end {
   position: absolute;
   right: 50px;
@@ -40,7 +48,7 @@ form {
   padding: 10px;
   border-radius: 5px;
   text-align: left;
-  background-color: #cfc9c9;
+  background-color: #fff;
   margin: 0;
   max-width: 100%;
 }
@@ -56,7 +64,7 @@ form {
   text-align: center;
 }
 .profile-view .user-profile {
-  background-color: #cfc9c9;
+  background-color: #fff;
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -77,6 +85,10 @@ form {
   justify-content: space-between;
 }
 @import url("https://fonts.googleapis.com/css2?family=Rokkitt:wght@300&display=swap");
+body {
+  background-color: #ececec;
+}
+
 .app-container {
   padding: 20px;
 }
