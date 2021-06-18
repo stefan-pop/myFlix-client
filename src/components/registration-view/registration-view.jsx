@@ -23,6 +23,7 @@ export function RegistrationView(props) {
     const [ validateUser, setValidateUser ] = useState('');
     const [ validatePassword, setValidatePassword ] = useState('');
     const [ validateEmail, setValidateEmail ] = useState('');
+    const [ validateDate, setValidateDate ] = useState('');
 
     
     // Username validation
@@ -56,13 +57,21 @@ export function RegistrationView(props) {
         }
     }
 
+    // Date validation
+    const validateBirthdate = (e) => {
+        if(!e.target.value.match(/^\d{4}-\d{2}-\d{2}$/) && e.target.value.length > 0 ) {
+            setValidateDate('Plese use only this format (yyyy-mm-dd)');
+        }else {
+            setValidateDate('');
+        }
+    }
 
     
     const handleSubmit = (e) => {
         e.preventDefault();
         
         // prevent submission of incorrect credentials
-        if ( validateUser || validateEmail || validatePassword ) {
+        if ( validateUser || validateEmail || validatePassword || validateDate ) {
             alert('Incorrect credentials')
             return false;
         }
@@ -108,7 +117,8 @@ export function RegistrationView(props) {
             
             <Form.Group controlId="formBirthday">
                 <Form.Label>Birth Date</Form.Label>
-                <Form.Control type="text"  onChange={ (e) => setBirthDate(e.target.value)} />
+                <Form.Control type="text"  onChange={ (e) => {setBirthDate(e.target.value), validateBirthdate(e)}} />
+                <span className="validation-feedback">{validateDate}</span>
             </Form.Group>
             
             <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
