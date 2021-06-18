@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // Style
 import './profile-view.scss';
 
-export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpdate, movies, onMovieDelete }) {
+export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies, onMovieDelete }) {
 
     const [ newUsername, updateUsername ] = useState('');
     const [ newPassword, updatePassword ] = useState('');
@@ -125,7 +125,6 @@ export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpd
                 </Form.Group>
 
                 <div className="button-wrapper">
-                    <Button variant="info"  onClick={() => { clickBack(); }}>Back</Button>
                     <Button variant="primary" size="sm" type="submit" onClick={updateUser} >Update details</Button>
                     <Button variant="danger" size="sm" type="button" onClick={deleteUser} >Delete account</Button>
                 </div>
@@ -137,8 +136,6 @@ export function ProfileView({ clickBack, userProfile, userToken, onDelete, onUpd
 
 ProfileView.propTypes = {
     movies: PropTypes.array.isRequired,
-
-    clickBack: PropTypes.func.isRequired,
 
     userProfile: PropTypes.shape({
         username: PropTypes.string.isRequired,
