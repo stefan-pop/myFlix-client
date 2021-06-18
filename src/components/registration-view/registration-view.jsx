@@ -87,6 +87,10 @@ export function RegistrationView(props) {
             window.open('/', '_self');
         }).catch(e => {
             console.log('error registering the user')
+            if(e.response.data == `${username} already exist.` && e.response.status == 400 )  {
+                setValidateUser('Username not available')
+            }
+            
             });
     }
 
