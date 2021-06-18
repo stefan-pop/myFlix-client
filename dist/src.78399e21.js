@@ -41015,7 +41015,7 @@ function ProfileView(_ref) {
   });
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "profile-view"
-  }, /*#__PURE__*/_react.default.createElement("h3", null, "Welcome to your profile ".concat(username)), " ", /*#__PURE__*/_react.default.createElement("hr", null), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Welcome ".concat(username)), " ", /*#__PURE__*/_react.default.createElement("hr", null), /*#__PURE__*/_react.default.createElement("div", {
     className: "user-profile"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "user-info"
@@ -41055,7 +41055,7 @@ function ProfileView(_ref) {
     }, "\xD7"), " ");
   })))), /*#__PURE__*/_react.default.createElement(_Form.default, {
     className: "update-info"
-  }, /*#__PURE__*/_react.default.createElement("h3", null, "Manage account"), " ", /*#__PURE__*/_react.default.createElement("hr", null), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Manage account"), " ", /*#__PURE__*/_react.default.createElement("hr", null), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, /*#__PURE__*/_react.default.createElement(_Form.default.Label, null, "New-username:"), /*#__PURE__*/_react.default.createElement(_Form.default.Control, {
     type: "text",
@@ -41629,7 +41629,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49331" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60369" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
