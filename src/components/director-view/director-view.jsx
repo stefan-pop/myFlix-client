@@ -10,8 +10,14 @@ export function DirectorView({ director, clickBack, movies }) {
 
     return (
         <div className="director-view">
-            <h1> {director.name} </h1>
-            <h3> {director.bio} </h3>
+            <h2> {director.name} </h2>
+            <p> {director.bio} </p>
+
+            <div>
+                <small>Birth: </small>
+                <p>{director.birth.slice(0, 10)}</p>
+            </div>
+
             <div className="director-movies">
                     <small>Movies belonging to this director:</small>
                     {directorsMovies.map((m, i) => <p key={m._id}> <Link to={`/movies/${m._id}`}>{m.title}</Link> </p> )}
