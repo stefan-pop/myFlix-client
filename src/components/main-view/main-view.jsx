@@ -180,7 +180,7 @@ export class MainView extends React.Component {
 
                         if (movies.length === 0) return <div className="main-view" />;
 
-                        return <Col md={8}>
+                        return <Col md={12}>
                             <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
                             <DirectorView director={movies.find(m => m.director.name === match.params.name).director} clickBack={() => {history.goBack()}} movies={movies}/>
                         </Col>
@@ -196,7 +196,7 @@ export class MainView extends React.Component {
 
                         if (movies.length === 0) return <div className="main-view" />;
 
-                        return <Col md={8}>
+                        return <Col md={12}>
                             <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
                             <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} clickBack={() => {history.goBack()}} movies={movies} />
                         </Col>
