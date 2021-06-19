@@ -104,12 +104,14 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
             const data = response.data;
             console.log(data)
             onUpdate(data)
+            setFeedback('Your form has been submitted')
+            clearForm()
         }).catch(err => {
             console.log(err + 'Update fail')
+            setFeedback('Submission failed')
         })
     }
     
-
     // Delete Account
     const deleteUser = () => {
         axios.delete(`https://myflix-app-1029.herokuapp.com/users/${username}`,
@@ -197,6 +199,8 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
                     <Form.Control type="text"  value={newBirth} onChange={(e) => {updateBirth(e.target.value),  validateBirthdate(e)}} />
                     <span className="validation-feedback">{validateDate}</span>
                 </Form.Group>
+
+                <div className="feedback">{feedback}</div>
 
                 <div className="button-wrapper">
                     <Button variant="primary" size="sm" type="submit" onClick={updateUser} >Update details</Button>
