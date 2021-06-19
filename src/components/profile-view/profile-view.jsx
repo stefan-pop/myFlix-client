@@ -17,11 +17,78 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
     const [ newEmail, updateEmail ] = useState('');
     const [ newBirth, updateBirth ] = useState('');
 
+    // States for validation
+    const [ validateUser, setValidateUser ] = useState('');
+    const [ validatePassword, setValidatePassword ] = useState('');
+    const [ validateEmail, setValidateEmail ] = useState('');
+    const [ validateDate, setValidateDate ] = useState('');
+    const [ feedback, setFeedback ] = useState('');
+
     const { username, email, birth_date, favorite_movies  } = userProfile;
+
+    // Username validation
+    const validateUsername = (e) => {
+        if (e.target.value.length > 0 && e.target.value.length < 5) {
+            setValidateUser('Username must be longer than 5 characters' );
+        }else {
+            setValidateUser('');
+        }
+
+        if (!e.currentTarget.value.match(/^[0-9a-zA-Z]+$/) && e.target.value.length > 0) {
+            setValidateUser('Only alphanumeric characters allowed')
+        }
+    }
+
+    // Password validation
+    const validatePwd = (e) => {
+        if (e.target.value.length > 0 && e.target.value.length < 8) {
+            setValidatePassword('Password must be longer than 8 characters');
+        }else {
+            setValidatePassword('');
+        }
+    }
+
+    // Email validation
+    const validateMail = (e) => {
+        if (!e.target.value.match(/\S+@\S+\.\S+/) && e.target.value.length > 0) {
+            setValidateEmail('Invalid email');
+        }else {
+            setValidateEmail('');
+        }
+    }
+
+    // Date validation
+    const validateBirthdate = (e) => {
+        if(!e.target.value.match(/^\d{4}-\d{2}-\d{2}$/) && e.target.value.length > 0 ) {
+            setValidateDate('Plese use only this format (yyyy-mm-dd)');
+        }else {
+            setValidateDate('');
+        }
+    }
+
+    // Clear inputs after submission
+    const clearForm = () => {
+        updateUsername('');
+        updateEmail('');
+        updatePassword('');
+        updateBirth('')
+    }
 
     // Update users info
     const updateUser = (e) => {
         e.preventDefault();
+
+        // validation for empty inputs
+        if (newUsername.length === 0 || newPassword.length === 0 || newEmail.length=== 0 || newBirth.length === 0) {
+            alert('Please fill in all the fields')
+            return false
+        }
+        
+        // prevent submission of incorrect credentials
+        if ( validateUser || validateEmail || validatePassword || validateDate ) {
+            alert('Incorrect credentials')
+            return false;
+        }
        
         axios.put(`https://myflix-app-1029.herokuapp.com/users/${username}`,
         { 
@@ -109,29 +176,33 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
                 <h4>Manage account</h4> <hr />
                 <Form.Group controlId="formBasicUsername">
                     <Form.Label>New-username:</Form.Label>
-                    <Form.Control type="text" value={newUsername} onChange={(e) => updateUsername(e.target.value)} />
+                    <Form.Control type="text" value={newUsername} onChange={(e) => {updateUsername(e.target.value),  validateUsername(e)}} />
+                    <span className="validation-feedback">{validateUser}</span> 
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>New-password:</Form.Label>
-                    <Form.Control type="password" value={newPassword} onChange={(e) => updatePassword(e.target.value)} />
+                    <Form.Control type="password" value={newPassword} onChange={(e) => {updatePassword(e.target.value),  validatePwd(e)}} />
+                    <span className="validation-feedback">{validatePassword}</span>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>New-email:</Form.Label>
-                    <Form.Control type="email"  value={newEmail} onChange={(e) => updateEmail(e.target.value)} />
+                    <Form.Control type="email"  value={newEmail} onChange={(e) => {updateEmail(e.target.value),  validateMail(e)}} />
+                    <span className="validation-feedback">{validateEmail}</span> 
                 </Form.Group>
 
                 <Form.Group controlId="formBasicBirth">
                     <Form.Label>New-Birth(yyyy-mm-dd):</Form.Label>
-                    <Form.Control type="text"  value={newBirth} onChange={(e) => updateBirth(e.target.value)} />
+                    <Form.Control type="text"  value={newBirth} onChange={(e) => {updateBirth(e.target.value),  validateBirthdate(e)}} />
+                    <span className="validation-feedback">{validateDate}</span>
                 </Form.Group>
 
                 <div className="button-wrapper">
                     <Button variant="primary" size="sm" type="submit" onClick={updateUser} >Update details</Button>
                     <Button variant="danger" size="sm" type="button" onClick={deleteUser} >Delete account</Button>
                 </div>
-            </Form>   
+            </Form>
         </div>
     )
 }
