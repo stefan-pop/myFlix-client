@@ -14,9 +14,29 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 
 export class MovieView extends React.Component {
 
-    render() {
-        const { movie, clickBack, token, user, onMovieAdd } = this.props;
+    constructor(props) {
+        super(props);
+        this.state = {
+            // this state is the text of the button for adding or removing a movie
+           buttonText: ''
+        }
+    }
+    
+    //Set the text of the button for add/remove a movie when the page loads or refreshes based on the content of the favorite_movies array.
+    componentDidMount() {
+        const favMovies = this.props.user.favorite_movies;
+        const movieId = this.props.movie._id;
+        if(favMovies.includes(movieId)) {
+            this.setState({buttonText: 'Remove from favorites'})
+        }
+        if(!favMovies.includes(movieId)) {
+            this.setState({buttonText: 'Add to favorites'})
+        }
+    }
 
+    render() {
+        const { movie, clickBack, token, user, onMovieAddorDelete } = this.props;
+        const { buttonText } = this.state
         const { username } = user
 
 
@@ -40,12 +60,39 @@ export class MovieView extends React.Component {
             }).then(data => {
                 const userObj = data;
                 console.log(userObj);
-                onMovieAdd(userObj);
+                // prop that updates the state of a users favorite_movies if a film is added to favorites
+                onMovieAddorDelete(userObj);
             }).catch(err => {
                 console.log(err);
             })
         }
+
+        // Delete a film from favorites
+        const deleteMovie = () => {
+            axios.delete(`https://myflix-app-1029.herokuapp.com/users/${username}/favorites/${movie._id}`,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+
+            }).then(response => {
+                const data = response.data;
+                console.log(data)
+                // prop that updates the state of a users favorite_movies if a film is deleted from favorites
+                onMovieAddorDelete(data)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
         
+        // Set the text of the button for add/remove a movie, when a user adds or removes a movie from favorites
+        const addRemove = () =>  {
+            if(user.favorite_movies.includes(movie._id)) {
+                this.setState({buttonText : 'Add to favorites'})
+                deleteMovie();
+            }else {
+                this.setState({buttonText: 'Remove from favorites'})
+                addMovie();
+            }
+        }
 
         return (
             <div className="movie-view">
@@ -78,7 +125,7 @@ export class MovieView extends React.Component {
                     <Button variant="link">Genre</Button>
                 </Link>
 
-                <Button variant="link" onClick={addMovie}>Add to favorites</Button>
+                { <Button variant="link" onClick={addRemove}>{buttonText}</Button> }
             </div>
         )
     }
@@ -120,5 +167,5 @@ MovieView.propTypes = {
         _id: PropTypes.string
     }).isRequired,
     
-    onMovieAdd: PropTypes.func.isRequired
+    onMovieAddorDelete: PropTypes.func.isRequired
 }
