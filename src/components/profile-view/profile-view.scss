@@ -1,5 +1,6 @@
 $boxShadow: 5px 5px 15px 5px #747373;
 $formBackgreound: #fff;
+$border-radius: 10px;
 
 .update-info {
     border: 1px solid rgba(128, 128, 128, 0.288);
@@ -26,6 +27,20 @@ $formBackgreound: #fff;
 .profile-view {
     h4 {
         text-align: center;
+    }
+
+    .feedback {
+        color: rgb(8, 160, 8);
+        border: 1px solid rgb(8, 160, 8);
+        text-align: center;
+        border-radius: $border-radius;
+        padding: 0 5px;
+        background-color: #fff;
+        margin: 20px 0;
+
+        &:empty {
+         display: none;
+      }
     }
     
     .user-profile {

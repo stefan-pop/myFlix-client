@@ -8,4 +8,17 @@ form {
    width: 100%;
    font-family: $text;
    margin: 0 auto;
+
+   .warning {
+      color: red;
+      border-radius: $border-radius;
+      border: 1px solid red;
+      padding: 0 5px;
+      text-align: center;
+      background-color: #fff;
+      
+      &:empty {
+         display: none;
+      }
+   }
 }
