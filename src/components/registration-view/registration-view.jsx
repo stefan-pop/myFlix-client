@@ -24,6 +24,7 @@ export function RegistrationView(props) {
     const [ validatePassword, setValidatePassword ] = useState('');
     const [ validateEmail, setValidateEmail ] = useState('');
     const [ validateDate, setValidateDate ] = useState('');
+    const [ warning, setWarning ] = useState('');
 
     
     // Username validation
@@ -87,11 +88,12 @@ export function RegistrationView(props) {
             window.open('/', '_self');
         }).catch(e => {
             console.log('error registering the user')
-            if(e.response.data == `${username} already exist.` && e.response.status == 400 )  {
-                setValidateUser('Username not available')
+            if(e.response.data == `${username} or ${email} already exist.` && e.response.status == 400 )  {
+               setWarning('Username or Email already existent');
+            }else {
+                setWarning(e.response.data);
             }
-            
-            });
+        });
     }
 
     return (
@@ -130,6 +132,7 @@ export function RegistrationView(props) {
             <Form.Text className="text-muted">
                 Already have an account? Register <Link to={`/`}>here</Link>
             </Form.Text>
+            <div className="warning">{warning}</div>
         </Form>
         </>
     )
