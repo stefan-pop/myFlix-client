@@ -18,6 +18,7 @@ export function LoginView(props) {
     const [ password, setPassword ] = useState('');
     const [ validateUser, setValidateUser ] = useState('');
     const [ validatePassword, setValidatePassword ] = useState('');
+    const [ warning, setWarning ] = useState('');
 
 
     // Username Validation
@@ -45,9 +46,26 @@ export function LoginView(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // prevent submission in case an input is empty is empty
+        if(username.length === 0) {
+            setWarning('You must introduce a username')
+            return false
+        }
+        if(password.length === 0) {
+            setWarning('You must introduce a password')
+            return false
+        }
+
         //prevent submission of incorrect credentials
         if( validatePassword || validateUser ) {
-            alert('Incorrect credentials')
+            if(validateUser) {
+                setWarning('Incorrectly introduced username')
+                return false
+            }
+            if(validatePassword) {
+                setWarning('Incorrectly introduced password')
+                return false
+            }
             return false
         }
 
@@ -59,6 +77,9 @@ export function LoginView(props) {
             props.onLogin(data);
         }).catch(err => {
             console.log('No such user');
+            console.log(err);
+            const error = !err.response.data.user ? 'Incorrect username or password' : err.response.data ;
+            setWarning(error);         
         })
     }
 
@@ -86,6 +107,7 @@ export function LoginView(props) {
             <Form.Text className="text-muted">
                 No account yet? Create one <Link to={`/register`}>here</Link>
             </Form.Text>
+            <div className="warning">{warning}</div>
         </Form>
         </>
     )
