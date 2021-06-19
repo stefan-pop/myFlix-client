@@ -70,6 +70,11 @@ export function RegistrationView(props) {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        // validation for empty inputs
+        if(username.length === 0 || pwd.length === 0 || email.length=== 0 || birth_date.length === 0) {
+            setWarning('Please fill in all the fields')
+            return false
+        }
         
         // prevent submission of incorrect credentials
         if ( validateUser || validateEmail || validatePassword || validateDate ) {
