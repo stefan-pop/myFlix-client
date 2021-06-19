@@ -76,7 +76,6 @@ export function LoginView(props) {
             const data = response.data;
             props.onLogin(data);
         }).catch(err => {
-            console.log('No such user');
             console.log(err);
             const error = !err.response.data.user ? 'Incorrect username or password' : err.response.data ;
             setWarning(error);         
