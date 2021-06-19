@@ -8,6 +8,17 @@ form {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: 0 auto;
 }
+form .warning {
+  color: red;
+  border-radius: 10px;
+  border: 1px solid red;
+  padding: 0 5px;
+  text-align: center;
+  background-color: #fff;
+}
+form .warning:empty {
+  display: none;
+}
 .card {
   margin-bottom: 20px;
 }
@@ -62,6 +73,18 @@ form {
 
 .profile-view h4 {
   text-align: center;
+}
+.profile-view .feedback {
+  color: #08a008;
+  border: 1px solid #08a008;
+  text-align: center;
+  border-radius: 10px;
+  padding: 0 5px;
+  background-color: #fff;
+  margin: 20px 0;
+}
+.profile-view .feedback:empty {
+  display: none;
 }
 .profile-view .user-profile {
   background-color: #fff;

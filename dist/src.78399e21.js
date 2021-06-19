@@ -39326,7 +39326,12 @@ function LoginView(props) {
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       validatePassword = _useState8[0],
-      setValidatePassword = _useState8[1]; // Username Validation
+      setValidatePassword = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      warning = _useState10[0],
+      setWarning = _useState10[1]; // Username Validation
 
 
   var validateUsername = function validateUsername(e) {
@@ -39351,10 +39356,30 @@ function LoginView(props) {
   };
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault(); //prevent submission of incorrect credentials
+    e.preventDefault(); // prevent submission in case an input is empty is empty
+
+    if (username.length === 0) {
+      setWarning('You must introduce a username');
+      return false;
+    }
+
+    if (password.length === 0) {
+      setWarning('You must introduce a password');
+      return false;
+    } //prevent submission of incorrect credentials
+
 
     if (validatePassword || validateUser) {
-      alert('Incorrect credentials');
+      if (validateUser) {
+        setWarning('Incorrectly introduced username');
+        return false;
+      }
+
+      if (validatePassword) {
+        setWarning('Incorrectly introduced password');
+        return false;
+      }
+
       return false;
     }
 
@@ -39365,7 +39390,9 @@ function LoginView(props) {
       var data = response.data;
       props.onLogin(data);
     }).catch(function (err) {
-      console.log('No such user');
+      console.log(err);
+      var error = !err.response.data.user ? 'Incorrect username or password' : err.response.data;
+      setWarning(error);
     });
   };
 
@@ -39403,7 +39430,9 @@ function LoginView(props) {
     className: "text-muted"
   }, "No account yet? Create one ", /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/register"
-  }, "here"))));
+  }, "here")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "warning"
+  }, warning)));
 }
 
 LoginView.propTypes = {
@@ -39496,7 +39525,12 @@ function RegistrationView(props) {
   var _useState15 = (0, _react.useState)(''),
       _useState16 = _slicedToArray(_useState15, 2),
       validateDate = _useState16[0],
-      setValidateDate = _useState16[1]; // Username validation
+      setValidateDate = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      warning = _useState18[0],
+      setWarning = _useState18[1]; // Username validation
 
 
   var validateUsername = function validateUsername(e) {
@@ -39539,7 +39573,13 @@ function RegistrationView(props) {
   };
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault(); // prevent submission of incorrect credentials
+    e.preventDefault(); // validation for empty inputs
+
+    if (username.length === 0 || pwd.length === 0 || email.length === 0 || birth_date.length === 0) {
+      setWarning('Please fill in all the fields');
+      return false;
+    } // prevent submission of incorrect credentials
+
 
     if (validateUser || validateEmail || validatePassword || validateDate) {
       alert('Incorrect credentials');
@@ -39558,8 +39598,10 @@ function RegistrationView(props) {
     }).catch(function (e) {
       console.log('error registering the user');
 
-      if (e.response.data == "".concat(username, " already exist.") && e.response.status == 400) {
-        setValidateUser('Username not available');
+      if (e.response.data == "".concat(username, " or ").concat(email, " already exist.") && e.response.status == 400) {
+        setWarning('Username or Email already existent');
+      } else {
+        setWarning(e.response.data);
       }
     });
   };
@@ -39617,7 +39659,9 @@ function RegistrationView(props) {
     className: "text-muted"
   }, "Already have an account? Register ", /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
-  }, "here"))));
+  }, "here")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "warning"
+  }, warning)));
 }
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
@@ -40035,21 +40079,50 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(MovieView);
 
-  function MovieView() {
+  function MovieView(props) {
+    var _this;
+
     _classCallCheck(this, MovieView);
 
-    return _super.apply(this, arguments);
-  }
+    _this = _super.call(this, props);
+    _this.state = {
+      // this state is the text of the button for adding or removing a movie
+      buttonText: ''
+    };
+    return _this;
+  } //Set the text of the button for add/remove a movie when the page loads or refreshes based on the content of the favorite_movies array.
+
 
   _createClass(MovieView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var favMovies = this.props.user.favorite_movies;
+      var movieId = this.props.movie._id;
+
+      if (favMovies.includes(movieId)) {
+        this.setState({
+          buttonText: 'Remove from favorites'
+        });
+      }
+
+      if (!favMovies.includes(movieId)) {
+        this.setState({
+          buttonText: 'Add to favorites'
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           movie = _this$props.movie,
           clickBack = _this$props.clickBack,
           token = _this$props.token,
           user = _this$props.user,
-          onMovieAdd = _this$props.onMovieAdd;
+          onMovieAddorDelete = _this$props.onMovieAddorDelete;
+      var buttonText = this.state.buttonText;
       var username = user.username; // Add a movie to favorites
 
       var addMovie = function addMovie() {
@@ -40070,11 +40143,45 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
           return response.json();
         }).then(function (data) {
           var userObj = data;
-          console.log(userObj);
-          onMovieAdd(userObj);
+          console.log(userObj); // prop that updates the state of a users favorite_movies if a film is added to favorites
+
+          onMovieAddorDelete(userObj);
         }).catch(function (err) {
           console.log(err);
         });
+      }; // Delete a film from favorites
+
+
+      var deleteMovie = function deleteMovie() {
+        _axios.default.delete("https://myflix-app-1029.herokuapp.com/users/".concat(username, "/favorites/").concat(movie._id), {
+          headers: {
+            Authorization: "Bearer ".concat(token)
+          }
+        }).then(function (response) {
+          var data = response.data;
+          console.log(data); // prop that updates the state of a users favorite_movies if a film is deleted from favorites
+
+          onMovieAddorDelete(data);
+        }).catch(function (err) {
+          console.log(err);
+        });
+      }; // Set the text of the button for add/remove a movie, when a user adds or removes a movie from favorites
+
+
+      var addRemove = function addRemove() {
+        if (user.favorite_movies.includes(movie._id)) {
+          _this2.setState({
+            buttonText: 'Add to favorites'
+          });
+
+          deleteMovie();
+        } else {
+          _this2.setState({
+            buttonText: 'Remove from favorites'
+          });
+
+          addMovie();
+        }
       };
 
       return /*#__PURE__*/_react.default.createElement("div", {
@@ -40123,8 +40230,8 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         variant: "link"
       }, "Genre")), /*#__PURE__*/_react.default.createElement(_Button.default, {
         variant: "link",
-        onClick: addMovie
-      }, "Add to favorites"));
+        onClick: addRemove
+      }, buttonText));
     }
   }]);
 
@@ -40158,7 +40265,7 @@ MovieView.propTypes = {
     pwd: _propTypes.default.string,
     _id: _propTypes.default.string
   }).isRequired,
-  onMovieAdd: _propTypes.default.func.isRequired
+  onMovieAddorDelete: _propTypes.default.func.isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-bootstrap/esm/Image":"../node_modules/react-bootstrap/esm/Image.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -40952,15 +41059,100 @@ function ProfileView(_ref) {
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       newBirth = _useState8[0],
-      updateBirth = _useState8[1];
+      updateBirth = _useState8[1]; // States for validation
+
+
+  var _useState9 = (0, _react.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      validateUser = _useState10[0],
+      setValidateUser = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      validatePassword = _useState12[0],
+      setValidatePassword = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      validateEmail = _useState14[0],
+      setValidateEmail = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      validateDate = _useState16[0],
+      setValidateDate = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      feedback = _useState18[0],
+      setFeedback = _useState18[1];
 
   var username = userProfile.username,
       email = userProfile.email,
       birth_date = userProfile.birth_date,
-      favorite_movies = userProfile.favorite_movies; // Update users info
+      favorite_movies = userProfile.favorite_movies; // Username validation
+
+  var validateUsername = function validateUsername(e) {
+    if (e.target.value.length > 0 && e.target.value.length < 5) {
+      setValidateUser('Username must be longer than 5 characters');
+    } else {
+      setValidateUser('');
+    }
+
+    if (!e.currentTarget.value.match(/^[0-9a-zA-Z]+$/) && e.target.value.length > 0) {
+      setValidateUser('Only alphanumeric characters allowed');
+    }
+  }; // Password validation
+
+
+  var validatePwd = function validatePwd(e) {
+    if (e.target.value.length > 0 && e.target.value.length < 8) {
+      setValidatePassword('Password must be longer than 8 characters');
+    } else {
+      setValidatePassword('');
+    }
+  }; // Email validation
+
+
+  var validateMail = function validateMail(e) {
+    if (!e.target.value.match(/\S+@\S+\.\S+/) && e.target.value.length > 0) {
+      setValidateEmail('Invalid email');
+    } else {
+      setValidateEmail('');
+    }
+  }; // Date validation
+
+
+  var validateBirthdate = function validateBirthdate(e) {
+    if (!e.target.value.match(/^\d{4}-\d{2}-\d{2}$/) && e.target.value.length > 0) {
+      setValidateDate('Plese use only this format (yyyy-mm-dd)');
+    } else {
+      setValidateDate('');
+    }
+  }; // Clear inputs after submission
+
+
+  var clearForm = function clearForm() {
+    updateUsername('');
+    updateEmail('');
+    updatePassword('');
+    updateBirth('');
+  }; // Update users info
+
 
   var updateUser = function updateUser(e) {
-    e.preventDefault();
+    e.preventDefault(); // validation for empty inputs
+
+    if (newUsername.length === 0 || newPassword.length === 0 || newEmail.length === 0 || newBirth.length === 0) {
+      alert('Please fill in all the fields');
+      return false;
+    } // prevent submission of incorrect credentials
+
+
+    if (validateUser || validateEmail || validatePassword || validateDate) {
+      alert('Incorrect credentials');
+      return false;
+    }
 
     _axios.default.put("https://myflix-app-1029.herokuapp.com/users/".concat(username), {
       username: newUsername,
@@ -40975,8 +41167,11 @@ function ProfileView(_ref) {
       var data = response.data;
       console.log(data);
       onUpdate(data);
+      setFeedback('Your form has been submitted');
+      clearForm();
     }).catch(function (err) {
       console.log(err + 'Update fail');
+      setFeedback('Submission failed');
     });
   }; // Delete Account
 
@@ -41061,33 +41256,43 @@ function ProfileView(_ref) {
     type: "text",
     value: newUsername,
     onChange: function onChange(e) {
-      return updateUsername(e.target.value);
+      updateUsername(e.target.value), validateUsername(e);
     }
-  })), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
+  }), /*#__PURE__*/_react.default.createElement("span", {
+    className: "validation-feedback"
+  }, validateUser)), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, /*#__PURE__*/_react.default.createElement(_Form.default.Label, null, "New-password:"), /*#__PURE__*/_react.default.createElement(_Form.default.Control, {
     type: "password",
     value: newPassword,
     onChange: function onChange(e) {
-      return updatePassword(e.target.value);
+      updatePassword(e.target.value), validatePwd(e);
     }
-  })), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
+  }), /*#__PURE__*/_react.default.createElement("span", {
+    className: "validation-feedback"
+  }, validatePassword)), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
     controlId: "formBasicEmail"
   }, /*#__PURE__*/_react.default.createElement(_Form.default.Label, null, "New-email:"), /*#__PURE__*/_react.default.createElement(_Form.default.Control, {
     type: "email",
     value: newEmail,
     onChange: function onChange(e) {
-      return updateEmail(e.target.value);
+      updateEmail(e.target.value), validateMail(e);
     }
-  })), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
+  }), /*#__PURE__*/_react.default.createElement("span", {
+    className: "validation-feedback"
+  }, validateEmail)), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
     controlId: "formBasicBirth"
   }, /*#__PURE__*/_react.default.createElement(_Form.default.Label, null, "New-Birth(yyyy-mm-dd):"), /*#__PURE__*/_react.default.createElement(_Form.default.Control, {
     type: "text",
     value: newBirth,
     onChange: function onChange(e) {
-      return updateBirth(e.target.value);
+      updateBirth(e.target.value), validateBirthdate(e);
     }
-  })), /*#__PURE__*/_react.default.createElement("div", {
+  }), /*#__PURE__*/_react.default.createElement("span", {
+    className: "validation-feedback"
+  }, validateDate)), /*#__PURE__*/_react.default.createElement("div", {
+    className: "feedback"
+  }, feedback), /*#__PURE__*/_react.default.createElement("div", {
     className: "button-wrapper"
   }, /*#__PURE__*/_react.default.createElement(_Button.default, {
     variant: "primary",
@@ -41367,7 +41572,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             },
             token: token,
             user: user_profile,
-            onMovieAdd: function onMovieAdd(data) {
+            onMovieAddorDelete: function onMovieAddorDelete(data) {
               return _this3.onMovieAddOrDelete(data);
             }
           }));
@@ -41629,7 +41834,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60369" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65410" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
