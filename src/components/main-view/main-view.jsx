@@ -60,7 +60,6 @@ export class MainView extends React.Component {
 
     // Login
     loginUser(authData) {
-        console.log(authData);
         this.setState({
           user_status: authData.user.username,
           token: authData.token,
@@ -83,7 +82,6 @@ export class MainView extends React.Component {
 
     // Update Users info
     updateUser(data) {
-        console.log(data);
         this.setState( {
             user_status: data.username,
             user_profile: data
@@ -106,7 +104,6 @@ export class MainView extends React.Component {
 
     // Set the state of user_profile, which represents an object with data about a user, after adding or deleting a movie.
     onMovieAddOrDelete(data) {
-        console.log(data)
         this.setState({
             user_profile: data
         });

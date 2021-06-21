@@ -102,7 +102,6 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
 
         }).then(response => {
             const data = response.data;
-            console.log(data)
             onUpdate(data)
             setFeedback('Your form has been submitted')
             clearForm()
@@ -134,7 +133,6 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
 
         }).then(response => {
             const data = response.data;
-            console.log(data)
             onMovieDelete(data)
         }).catch(err => {
             console.log(err)

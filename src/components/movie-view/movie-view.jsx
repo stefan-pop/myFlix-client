@@ -59,7 +59,6 @@ export class MovieView extends React.Component {
                 return response.json();
             }).then(data => {
                 const userObj = data;
-                console.log(userObj);
                 // prop that updates the state of a users favorite_movies if a film is added to favorites
                 onMovieAddorDelete(userObj);
             }).catch(err => {
@@ -75,7 +74,6 @@ export class MovieView extends React.Component {
 
             }).then(response => {
                 const data = response.data;
-                console.log(data)
                 // prop that updates the state of a users favorite_movies if a film is deleted from favorites
                 onMovieAddorDelete(data)
             }).catch(err => {
