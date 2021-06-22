@@ -40142,8 +40142,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         }).then(function (response) {
           return response.json();
         }).then(function (data) {
-          var userObj = data;
-          console.log(userObj); // prop that updates the state of a users favorite_movies if a film is added to favorites
+          var userObj = data; // prop that updates the state of a users favorite_movies if a film is added to favorites
 
           onMovieAddorDelete(userObj);
         }).catch(function (err) {
@@ -40158,8 +40157,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
             Authorization: "Bearer ".concat(token)
           }
         }).then(function (response) {
-          var data = response.data;
-          console.log(data); // prop that updates the state of a users favorite_movies if a film is deleted from favorites
+          var data = response.data; // prop that updates the state of a users favorite_movies if a film is deleted from favorites
 
           onMovieAddorDelete(data);
         }).catch(function (err) {
@@ -41165,7 +41163,6 @@ function ProfileView(_ref) {
       }
     }).then(function (response) {
       var data = response.data;
-      console.log(data);
       onUpdate(data);
       setFeedback('Your form has been submitted');
       clearForm();
@@ -41197,7 +41194,6 @@ function ProfileView(_ref) {
       }
     }).then(function (response) {
       var data = response.data;
-      console.log(data);
       onMovieDelete(data);
     }).catch(function (err) {
       console.log(err);
@@ -41436,7 +41432,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "loginUser",
     value: function loginUser(authData) {
-      console.log(authData);
       this.setState({
         user_status: authData.user.username,
         token: authData.token,
@@ -41460,7 +41455,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateUser",
     value: function updateUser(data) {
-      console.log(data);
       this.setState({
         user_status: data.username,
         user_profile: data
@@ -41484,7 +41478,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "onMovieAddOrDelete",
     value: function onMovieAddOrDelete(data) {
-      console.log(data);
       this.setState({
         user_profile: data
       });
@@ -41834,7 +41827,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65410" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58719" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
