@@ -64,9 +64,9 @@ export class MainView extends React.Component {
           token: authData.token,
         });
       
-        localStorage.setItem('profile', JSON.stringify(authData.user));
+        localStorage.setItem('user', JSON.stringify(authData.user));
         localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user.username);
+        localStorage.setItem('username', authData.user.username);
         this.getMovies(authData.token);
       }
 
@@ -84,8 +84,6 @@ export class MainView extends React.Component {
             username: data.username,
         } );
 
-        localStorage.setItem('user', data.username);
-        localStorage.setItem('profile', JSON.stringify(data));
     }
 
     // Remove account
@@ -94,6 +92,8 @@ export class MainView extends React.Component {
         localStorage.removeItem('user');
         localStorage.removeItem('profile');
         });
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('user', JSON.stringify(data));
     }
 
     // Set the state of user, which represents an object with data about a user, after adding or deleting a movie.
