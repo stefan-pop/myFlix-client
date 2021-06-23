@@ -120,7 +120,7 @@ class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <>
-                            <NavigationBar logOut={() => this.logoutDeleteUser()} user={username}  /> 
+                            <NavigationBar logOut={() => this.logoutDeleteUser()} username={username}  /> 
                             <MovieList movies={movies}/>;  
                         </>   
                     }} />
@@ -147,8 +147,8 @@ class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={12}>
-                            <NavigationBar logOut={() => this.logoutUser()} user={username}  />
-                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()}  token={token} user={user} onMovieAddorDelete={(data) => this.onMovieAddOrDelete(data)} />
+                            <NavigationBar logOut={() => this.logoutDeleteUser()} username={username}  />
+                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()}  token={token} onMovieAddorDelete={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
 
@@ -165,8 +165,8 @@ class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={12}>
-                            <NavigationBar logOut={() => this.logoutUser()} user={username}  />
-                            <DirectorView director={movies.find(m => m.director.name === match.params.name).director} clickBack={() => {history.goBack()}} movies={movies}/>
+                            <NavigationBar logOut={() => this.logoutDeleteUser()} username={username}  />
+                            <DirectorView director={movies.find(m => m.director.name === match.params.name).director} clickBack={() => {history.goBack()}} />
                         </Col>
                     }} />
 
@@ -181,8 +181,8 @@ class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={12}>
-                            <NavigationBar logOut={() => this.logoutUser()} user={username}  />
-                            <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} clickBack={() => {history.goBack()}} movies={movies} />
+                            <NavigationBar logOut={() => this.logoutDeleteUser()} username={username}  />
+                            <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} clickBack={() => {history.goBack()}} />
                         </Col>
                     }} />
 
@@ -199,8 +199,8 @@ class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col>
-                            <NavigationBar logOut={() => this.logoutUser()} user={username}  />
-                            <ProfileView clickBack={() => {history.goBack()}} userProfile={user} userToken={token} onDelete={() => this.deleteUser()}  onUpdate={(data) => this.updateUser(data)} movies={movies} onMovieDelete={(data) => this.onMovieAddOrDelete(data)} />
+                            <NavigationBar logOut={() => this.logoutDeleteUser()} username={username}  />
+                            <ProfileView clickBack={() => {history.goBack()}} userToken={token} onDelete={() => this.deleteUser()}  onUpdate={(data) => this.updateUser(data)} onMovieDelete={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
 
