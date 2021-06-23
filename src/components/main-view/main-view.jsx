@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
@@ -210,6 +211,11 @@ class MainView extends React.Component {
 
         )
     }
+}
+
+
+MainView.propTypes = {
+    movies: PropTypes.array.isRequired
 }
 
 let mapStateToProps = state => {
