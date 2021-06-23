@@ -24,7 +24,7 @@ export class MainView extends React.Component {
         super();
         this.state = {
             movies: [],
-            user_status: null,
+            username: null,
             token: null,
             user_profile: null
         }
@@ -34,7 +34,7 @@ export class MainView extends React.Component {
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
             this.setState({
-            user_status: localStorage.getItem('user'),
+            username: localStorage.getItem('user'),
             user_profile: JSON.parse(localStorage.getItem('profile')),
             token: localStorage.getItem('token')
             });
@@ -61,7 +61,7 @@ export class MainView extends React.Component {
     // Login
     loginUser(authData) {
         this.setState({
-          user_status: authData.user.username,
+          username: authData.user.username,
           token: authData.token,
           user_profile: authData.user
         });
@@ -72,18 +72,18 @@ export class MainView extends React.Component {
         this.getMovies(authData.token);
       }
 
-    // Logout function that clears the local storage and sets the user_status to null
+    // Logout function that clears the local storage and sets the username to null
     logoutUser() {
         localStorage.clear();
         this.setState({
-            user_status: null
+            username: null
         });
     }
 
     // Update Users info
     updateUser(data) {
         this.setState( {
-            user_status: data.username,
+            username: data.username,
             user_profile: data
         } );
 
@@ -97,7 +97,7 @@ export class MainView extends React.Component {
         localStorage.removeItem('user');
         localStorage.removeItem('profile');
         this.setState({
-            user_status: null,
+            username: null,
             token: null
         });
     }
@@ -113,7 +113,7 @@ export class MainView extends React.Component {
 
 
     render() {
-        const {movies, user_status, token, user_profile} = this.state;
+        const {movies, username, token, user_profile} = this.state;
 
         return (
             <Router>
@@ -122,7 +122,7 @@ export class MainView extends React.Component {
                     {/* HOME */}
                     <Route exact path="/" render={() => {
 
-                        if(!user_status) {
+                        if(!username) {
                             return  <Col>
                                 <LoginView onLogin={ (user) => this.loginUser(user) } />
                             </Col>
@@ -132,7 +132,7 @@ export class MainView extends React.Component {
 
                         return movies.map(m => (
                             <Col md={6} key={m._id}>
-                                <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
+                                <NavigationBar logOut={() => this.logoutUser()} user={username}  />
                                 <MovieCard movieObject={m} />
                             </Col>
                         ))        
@@ -141,7 +141,7 @@ export class MainView extends React.Component {
 
                     {/* REGISTRATION VIEW */}
                     <Route path="/register" render={() => {
-                        if (user_status) return <Redirect to="/" />
+                        if (username) return <Redirect to="/" />
                         return <Col>
                             <RegistrationView />
                         </Col>
@@ -151,7 +151,7 @@ export class MainView extends React.Component {
                     {/* MOVIE VIEW */}
                     <Route path="/movies/:movieId" render={({match, history}) => {
 
-                        if(!user_status) {
+                        if(!username) {
                             return  <Col>
                                 <LoginView onLogin={ (user) => this.loginUser(user) } />
                             </Col>
@@ -160,7 +160,7 @@ export class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={12}>
-                            <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
+                            <NavigationBar logOut={() => this.logoutUser()} user={username}  />
                             <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()}  token={token} user={user_profile} onMovieAddorDelete={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
@@ -169,7 +169,7 @@ export class MainView extends React.Component {
                     {/* DIRECTOR VIEW */}
                     <Route path="/directors/:name" render={({ match, history }) => {
 
-                        if(!user_status) {
+                        if(!username) {
                             return <Col>
                                 <LoginView onLogin={ (user) => this.loginUser(user) } />
                             </Col>
@@ -178,14 +178,14 @@ export class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={12}>
-                            <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
+                            <NavigationBar logOut={() => this.logoutUser()} user={username}  />
                             <DirectorView director={movies.find(m => m.director.name === match.params.name).director} clickBack={() => {history.goBack()}} movies={movies}/>
                         </Col>
                     }} />
 
                     {/* GENRE VIEW */}
                     <Route path="/genres/:name" render={({ match, history }) => {
-                        if(!user_status) {
+                        if(!username) {
                             return <Col>
                                 <LoginView onLogin={ (user) => this.loginUser(user) } />
                             </Col>
@@ -194,7 +194,7 @@ export class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col md={12}>
-                            <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
+                            <NavigationBar logOut={() => this.logoutUser()} user={username}  />
                             <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} clickBack={() => {history.goBack()}} movies={movies} />
                         </Col>
                     }} />
@@ -203,7 +203,7 @@ export class MainView extends React.Component {
                     {/* PROFILE VIEW */}
                     <Route path="/users/:username" render={({match, history}) => {
 
-                        if(!user_status) {
+                        if(!username) {
                             return <Col>
                                 <LoginView onLogin={ (user) => this.loginUser(user) } />
                             </Col>
@@ -212,7 +212,7 @@ export class MainView extends React.Component {
                         if (movies.length === 0) return <div className="main-view" />;
 
                         return <Col>
-                            <NavigationBar logOut={() => this.logoutUser()} user={user_status}  />
+                            <NavigationBar logOut={() => this.logoutUser()} user={username}  />
                             <ProfileView clickBack={() => {history.goBack()}} userProfile={user_profile} userToken={token} onDelete={() => this.deleteUser()}  onUpdate={(data) => this.updateUser(data)} movies={movies} onMovieDelete={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
