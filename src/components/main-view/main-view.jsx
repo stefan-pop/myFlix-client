@@ -41,6 +41,7 @@ export class MainView extends React.Component {
             token: localStorage.getItem('token')
             });
             this.getMovies(accessToken);
+            this.props.setUser(JSON.parse(localStorage.getItem('user')))
         }
     }
 
@@ -50,6 +51,7 @@ export class MainView extends React.Component {
           headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
+            this.props.setMovies(response.data)
         })
         .catch(error => {
           console.log(error);
@@ -59,6 +61,7 @@ export class MainView extends React.Component {
 
     // Login
     loginUser(authData) {
+        this.props.setUser(authData.user)
         this.setState({
           username: authData.user.username,
           token: authData.token,
@@ -86,11 +89,14 @@ export class MainView extends React.Component {
 
         localStorage.setItem('username', data.username);
         localStorage.setItem('user', JSON.stringify(data));
+        // update the state of user in the store after updating details
+        this.props.setUser(data)
     }
 
     // Set the state of user, which represents an object with data about a user, after adding or deleting a movie.
     onMovieAddOrDelete(data) {
-        localStorage.setItem('profile', JSON.stringify(data))
+        localStorage.setItem('user', JSON.stringify(data))
+        this.props.setUser(data)
     }
 
 
