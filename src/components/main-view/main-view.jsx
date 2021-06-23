@@ -71,7 +71,7 @@ export class MainView extends React.Component {
       }
 
     // Logout function that clears the local storage and sets the username to null
-    logoutUser() {
+    logoutDeleteUser() {
         localStorage.clear();
         this.setState({
             username: null
@@ -84,14 +84,6 @@ export class MainView extends React.Component {
             username: data.username,
         } );
 
-    }
-
-    // Remove account
-    deleteUser() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        localStorage.removeItem('profile');
-        });
         localStorage.setItem('username', data.username);
         localStorage.setItem('user', JSON.stringify(data));
     }
