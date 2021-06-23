@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import Button from 'react-bootstrap/Button'
 import PropTypes from 'prop-types';
@@ -6,7 +7,13 @@ import PropTypes from 'prop-types';
 // Router
 import { Link } from "react-router-dom";
 
-export function GenreView(props) {
+// Getting the movie list from store as prop
+const mapStateToProps = state => {
+    const {movies} = state;
+    return {movies};
+};
+
+function GenreView(props) {
 
     const { genre, clickBack, movies } = props;
 
@@ -37,3 +44,5 @@ GenreView.propTypes = {
     clickBack: PropTypes.func.isRequired,
     movies: PropTypes.array.isRequired
 }
+
+export default connect(mapStateToProps)(GenreView);

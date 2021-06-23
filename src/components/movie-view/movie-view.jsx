@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 // react-bootstrap components
 import Button from 'react-bootstrap/Button';
@@ -10,9 +11,13 @@ import axios from 'axios';
 
 // Styles
 import './movie-view.scss';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
-export class MovieView extends React.Component {
+const mapStateToProps = state => {
+    const {user} = state;
+    return {user}
+}
+
+class MovieView extends React.Component {
 
     constructor(props) {
         super(props);
@@ -167,3 +172,5 @@ MovieView.propTypes = {
     
     onMovieAddorDelete: PropTypes.func.isRequired
 }
+
+export default connect(mapStateToProps)(MovieView)

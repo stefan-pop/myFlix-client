@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 // Router
 import { Link } from "react-router-dom";
@@ -10,7 +11,13 @@ import { Link } from "react-router-dom";
 // Style
 import './profile-view.scss';
 
-export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies, onMovieDelete }) {
+// Get the movie array and the user from store
+const mapStateToProps = state => {
+    const {movies, user} = state;
+    return {movies, user}
+}
+
+function ProfileView({ user, userToken, onDelete, onUpdate, movies, onMovieDelete }) {
 
     const [ newUsername, updateUsername ] = useState('');
     const [ newPassword, updatePassword ] = useState('');
@@ -24,7 +31,7 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
     const [ validateDate, setValidateDate ] = useState('');
     const [ feedback, setFeedback ] = useState('');
 
-    const { username, email, birth_date, favorite_movies  } = userProfile;
+    const { username, email, birth_date, favorite_movies  } = user;
 
     // Username validation
     const validateUsername = (e) => {
@@ -213,7 +220,7 @@ export function ProfileView({ userProfile, userToken, onDelete, onUpdate, movies
 ProfileView.propTypes = {
     movies: PropTypes.array.isRequired,
 
-    userProfile: PropTypes.shape({
+    user: PropTypes.shape({
         username: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
         favorite_movies: PropTypes.array.isRequired,
@@ -227,3 +234,5 @@ ProfileView.propTypes = {
     onUpdate: PropTypes.func.isRequired,
     onMovieDelete: PropTypes.func.isRequired,
 }
+
+export default connect(mapStateToProps)(ProfileView)

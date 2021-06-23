@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
@@ -9,7 +10,13 @@ import { Link } from "react-router-dom";
 // Style
 import './director-view.scss';
 
-export function DirectorView({ director, clickBack, movies }) {
+// Getting the movie list from store as prop
+const mapStateToProps = state => {
+    const {movies} = state;
+    return {movies};
+};
+
+function DirectorView({ director, clickBack, movies }) {
 
     const directorsMovies = movies.filter(m => m.director.name === director.name)
 
@@ -42,3 +49,5 @@ DirectorView.propTypes = {
     clickBack: PropTypes.func.isRequired,
     movies: PropTypes.array.isRequired
 }
+
+export default connect(mapStateToProps)(DirectorView)
