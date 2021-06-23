@@ -23,10 +23,8 @@ export class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            movies: [],
             username: null,
             token: null,
-            user: null
         }
     }
 
@@ -48,9 +46,6 @@ export class MainView extends React.Component {
           headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
-          this.setState({
-            movies: response.data
-          });
         })
         .catch(error => {
           console.log(error);
@@ -63,7 +58,6 @@ export class MainView extends React.Component {
         this.setState({
           username: authData.user.username,
           token: authData.token,
-          user: authData.user
         });
       
         localStorage.setItem('profile', JSON.stringify(authData.user));
@@ -84,7 +78,6 @@ export class MainView extends React.Component {
     updateUser(data) {
         this.setState( {
             username: data.username,
-            user: data
         } );
 
         localStorage.setItem('user', data.username);
@@ -96,24 +89,17 @@ export class MainView extends React.Component {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         localStorage.removeItem('profile');
-        this.setState({
-            username: null,
-            token: null
         });
     }
 
     // Set the state of user, which represents an object with data about a user, after adding or deleting a movie.
     onMovieAddOrDelete(data) {
-        this.setState({
-            user: data
-        });
-
         localStorage.setItem('profile', JSON.stringify(data))
     }
 
 
     render() {
-        const {movies, username, token, user} = this.state;
+        const {username, token} = this.state;
 
         return (
             <Router>
