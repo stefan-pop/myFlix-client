@@ -26,7 +26,7 @@ export class MainView extends React.Component {
             movies: [],
             username: null,
             token: null,
-            user_profile: null
+            user: null
         }
     }
 
@@ -35,7 +35,7 @@ export class MainView extends React.Component {
         if (accessToken !== null) {
             this.setState({
             username: localStorage.getItem('user'),
-            user_profile: JSON.parse(localStorage.getItem('profile')),
+            user: JSON.parse(localStorage.getItem('profile')),
             token: localStorage.getItem('token')
             });
             this.getMovies(accessToken);
@@ -63,7 +63,7 @@ export class MainView extends React.Component {
         this.setState({
           username: authData.user.username,
           token: authData.token,
-          user_profile: authData.user
+          user: authData.user
         });
       
         localStorage.setItem('profile', JSON.stringify(authData.user));
@@ -84,7 +84,7 @@ export class MainView extends React.Component {
     updateUser(data) {
         this.setState( {
             username: data.username,
-            user_profile: data
+            user: data
         } );
 
         localStorage.setItem('user', data.username);
@@ -102,10 +102,10 @@ export class MainView extends React.Component {
         });
     }
 
-    // Set the state of user_profile, which represents an object with data about a user, after adding or deleting a movie.
+    // Set the state of user, which represents an object with data about a user, after adding or deleting a movie.
     onMovieAddOrDelete(data) {
         this.setState({
-            user_profile: data
+            user: data
         });
 
         localStorage.setItem('profile', JSON.stringify(data))
@@ -113,7 +113,7 @@ export class MainView extends React.Component {
 
 
     render() {
-        const {movies, username, token, user_profile} = this.state;
+        const {movies, username, token, user} = this.state;
 
         return (
             <Router>
@@ -161,7 +161,7 @@ export class MainView extends React.Component {
 
                         return <Col md={12}>
                             <NavigationBar logOut={() => this.logoutUser()} user={username}  />
-                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()}  token={token} user={user_profile} onMovieAddorDelete={(data) => this.onMovieAddOrDelete(data)} />
+                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} clickBack={() => history.goBack()}  token={token} user={user} onMovieAddorDelete={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
 
@@ -213,7 +213,7 @@ export class MainView extends React.Component {
 
                         return <Col>
                             <NavigationBar logOut={() => this.logoutUser()} user={username}  />
-                            <ProfileView clickBack={() => {history.goBack()}} userProfile={user_profile} userToken={token} onDelete={() => this.deleteUser()}  onUpdate={(data) => this.updateUser(data)} movies={movies} onMovieDelete={(data) => this.onMovieAddOrDelete(data)} />
+                            <ProfileView clickBack={() => {history.goBack()}} userProfile={user} userToken={token} onDelete={() => this.deleteUser()}  onUpdate={(data) => this.updateUser(data)} movies={movies} onMovieDelete={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
 
