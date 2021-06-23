@@ -13,15 +13,15 @@ import './movie-card.scss'
 
 export class MovieCard extends React.Component {
     render() {
-        const { movieObject } = this.props;
+        const { movie } = this.props;
         
         return(
             <Card>
-                <Card.Img variant="top" src={movieObject.imagePath} alt='Movie Image' />
+                <Card.Img variant="top" src={movie.imagePath} alt='Movie Image' />
                 <Card.Body>
-                    <Card.Title>{movieObject.title}</Card.Title>
-                    <Card.Text>{movieObject.description.slice(0, 60) + '...'}</Card.Text>
-                    <Link to={`/movies/${movieObject._id}`}>
+                    <Card.Title>{movie.title}</Card.Title>
+                    <Card.Text>{movie.description.slice(0, 60) + '...'}</Card.Text>
+                    <Link to={`/movies/${movie._id}`}>
                         <Button variant="link">See more</Button>
                     </Link>
                 </Card.Body>
@@ -31,7 +31,7 @@ export class MovieCard extends React.Component {
 }
 
 MovieCard.propTypes = {
-    movieObject: PropTypes.shape({
+    movie: PropTypes.shape({
 
         title: PropTypes.string.isRequired,
 
