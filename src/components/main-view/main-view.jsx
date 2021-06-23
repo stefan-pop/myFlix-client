@@ -22,7 +22,7 @@ import {GenreView} from '../genre-view/genre-view';
 import {NavigationBar} from '../navigation-bar/navigation-bar';
 import {ProfileView} from '../profile-view/profile-view';
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
 
     constructor() {
         super();
@@ -102,6 +102,7 @@ export class MainView extends React.Component {
 
     render() {
         const {username, token} = this.state;
+        const {movies} = this.props;
 
         return (
             <Router>
@@ -212,3 +213,9 @@ export class MainView extends React.Component {
         )
     }
 }
+
+let mapStateToProps = state => {
+    return { movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);

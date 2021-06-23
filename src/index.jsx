@@ -8,7 +8,7 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 import moviesApp from './reducers/reducers';
 
 // Components
-import {MainView} from './components/main-view/main-view';
+import MainView from './components/main-view/main-view';
 
 // react-bootstrap components
 import Container from 'react-bootstrap/Container';
