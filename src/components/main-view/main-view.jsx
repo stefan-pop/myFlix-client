@@ -15,7 +15,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 // Components
 import {LoginView} from '../login-view/login-view';
 import {RegistrationView} from '../registration-view/registration-view';
-import {MovieCard} from '../movie-card/movie-card';
+import MovieList from '../movie-list/movie-list';
 import {MovieView} from '../movie-view/movie-view';
 import {DirectorView} from '../director-view/director-view';
 import {GenreView} from '../genre-view/genre-view';
@@ -119,12 +119,10 @@ class MainView extends React.Component {
 
                         if (movies.length === 0) return <div className="main-view" />;
 
-                        return movies.map(m => (
-                            <Col md={6} key={m._id}>
-                                <NavigationBar logOut={() => this.logoutUser()} user={username}  />
-                                <MovieCard movieObject={m} />
-                            </Col>
-                        ))        
+                        return <>
+                            <NavigationBar logOut={() => this.logoutDeleteUser()} user={username}  /> 
+                            <MovieList movies={movies}/>;  
+                        </>   
                     }} />
 
 
