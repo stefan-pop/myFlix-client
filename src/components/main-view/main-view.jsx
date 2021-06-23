@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 
+// Redux
+import { connect } from 'react-redux';
+import { setMovies, setUser } from '../../actions/actions';
+
 // react-bootstrap components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
