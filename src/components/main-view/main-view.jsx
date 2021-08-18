@@ -201,7 +201,7 @@ class MainView extends React.Component {
 
                         return <Col>
                             <NavigationBar logOut={() => this.logoutDeleteUser()} username={username}  />
-                            <ProfileView clickBack={() => {history.goBack()}} userToken={token} onDelete={() => this.deleteUser()}  onUpdate={(data) => this.updateUser(data)} onMovieDelete={(data) => this.onMovieAddOrDelete(data)} />
+                            <ProfileView clickBack={() => {history.goBack()}} userToken={token} onDelete={() => this.logoutDeleteUser()}  onUpdate={(data) => this.updateUser(data)} onMovieDelete={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
 
