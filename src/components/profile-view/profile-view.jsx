@@ -209,7 +209,15 @@ function ProfileView({ user, userToken, onDelete, onUpdate, movies, onMovieDelet
 
                 <div className="button-wrapper">
                     <Button variant="primary" size="sm" type="submit" onClick={updateUser} >Update details</Button>
-                    <Button variant="danger" size="sm" type="button" onClick={deleteUser} >Delete account</Button>
+                    <Button variant="danger" 
+                        size="sm" type="button" 
+                        onClick={() => {
+                            if (confirm("Are you sure?")) {
+                                this.deleteUser();
+                                window.open(`/`, '_self');
+                            }
+                          }} 
+                    >Delete account</Button>
                 </div>
             </Form>
         </div>
