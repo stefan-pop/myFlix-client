@@ -127,7 +127,7 @@ function ProfileView({ user, userToken, onDelete, onUpdate, movies, onMovieDelet
         }).then(response => {
             console.log(response.data)
             onDelete();
-            window.open('https://myflix-2021.netlify.app/');
+            window.open('https://myflix-2021.netlify.app/', '_self');
         }).catch(err => {
             console.log(err)
         })
