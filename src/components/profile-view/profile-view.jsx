@@ -214,7 +214,7 @@ function ProfileView({ user, userToken, onDelete, onUpdate, movies, onMovieDelet
                         size="sm" type="button" 
                         onClick={() => {
                             if (confirm("Are you sure?")) {
-                                this.deleteUser();
+                                deleteUser();
                             }
                           }} 
                     >Delete account</Button>
