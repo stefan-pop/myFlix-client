@@ -127,6 +127,7 @@ function ProfileView({ user, userToken, onDelete, onUpdate, movies, onMovieDelet
         }).then(response => {
             console.log(response.data)
             onDelete();
+            window.location.reload();
         }).catch(err => {
             console.log(err)
         })
@@ -214,7 +215,6 @@ function ProfileView({ user, userToken, onDelete, onUpdate, movies, onMovieDelet
                         onClick={() => {
                             if (confirm("Are you sure?")) {
                                 this.deleteUser();
-                                window.open(`/`, '_self');
                             }
                           }} 
                     >Delete account</Button>
